@@ -13,7 +13,12 @@ var listCmd = &cobra.Command{
 	в случае его отсутвия попросит добавить подключения`,
 	Run: func(cmd *cobra.Command, args []string) {
 		list := list.GetConnectList()
-		fmt.Println(list)
+
+		fmt.Println("Список ваших подключений:")
+
+		for _, v := range list {
+			fmt.Println(v)
+		}
 	},
 }
 
