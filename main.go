@@ -1,18 +1,12 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"ssh+/app/file"
 	"ssh+/cmd"
+	"ssh+/inits"
 )
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
-
-	file.CreateFile()
+	inits.CreateFileConnects()
 }
 
 func main() {
