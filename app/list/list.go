@@ -1,20 +1,21 @@
 package list
 
 import (
-	"fmt"
-	"ssh+/app/convert"
+	"encoding/json"
+	"log"
 	"ssh+/app/file"
 )
 
-func getMapConnect() map[string]string {
+func GetConnectList() []string {
 	fileConnects := file.ReadFile()
-	mapConnects := convert.ArrayToMap(convert.StringToArray(fileConnects))
+	var connections file.Connections
 
-	return mapConnects
-}
+	err := json.Unmarshal([]byte(fileConnects), &connections)
+	if err != nil {
+		log.Fatal("Ошибка при разборе JSON:", err)
+	}
 
-func GetConnectList() string {
-	mapConnects := getMapConnect()
-	fmt.Println(mapConnects)
-	return ""
+	result := connections.GetConnectionsAlias()
+
+	return result
 }
