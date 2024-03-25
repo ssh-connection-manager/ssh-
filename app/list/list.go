@@ -12,7 +12,7 @@ func GetConnectList() []string {
 
 	err := json.Unmarshal([]byte(fileConnects), &connections)
 	if err != nil {
-		log.Fatal("Ошибка при разборе JSON:", err)
+		log.Fatal("Пустой файл")
 	}
 
 	result := connections.GetConnectionsAlias()
