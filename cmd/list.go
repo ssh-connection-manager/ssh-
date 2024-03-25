@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"ssh+/app/list"
+	"ssh+/output"
 )
 
 var listCmd = &cobra.Command{
@@ -17,7 +18,7 @@ var listCmd = &cobra.Command{
 		fmt.Println("Список ваших подключений:")
 
 		for _, v := range list {
-			fmt.Println(v)
+			output.GetOutSuccess(v)
 		}
 	},
 }

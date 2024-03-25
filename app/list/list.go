@@ -2,8 +2,8 @@ package list
 
 import (
 	"encoding/json"
-	"log"
 	"ssh+/app/file"
+	"ssh+/output"
 )
 
 func GetConnectList() []string {
@@ -12,7 +12,7 @@ func GetConnectList() []string {
 
 	err := json.Unmarshal([]byte(fileConnects), &connections)
 	if err != nil {
-		log.Fatal("Ошибка при разборе JSON:", err)
+		output.GetOutError("пустой файл")
 	}
 
 	result := connections.GetConnectionsAlias()

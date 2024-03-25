@@ -8,16 +8,7 @@ import (
 	"path/filepath"
 )
 
-type File struct {
-	Path string
-	Name string
-}
-
-type FileService interface {
-	CreateFile()
-}
-
-func (file *File) CreateFile() {
+func CreateFile() {
 	filePath, err := GetFullPath()
 	if err != nil {
 		panic(err)
