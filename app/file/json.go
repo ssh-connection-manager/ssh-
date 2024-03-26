@@ -2,6 +2,7 @@ package file
 
 import (
 	"encoding/json"
+	"ssh+/output"
 )
 
 type Connections struct {
@@ -15,19 +16,16 @@ type Connect struct {
 	Password string `json:"password"`
 }
 
-func (c *Connections) UnmarshalJSON(data []byte) error {
-	type connections Connections
-	var result connections
-
-	if err := json.Unmarshal(data, &result); err != nil {
-		return err
+func (c *Connections) ReadJsonData(jsonData string) {
+	err := json.Unmarshal([]byte(jsonData), &c)
+	if err != nil {
+		output.GetOutError("пустой файл")
 	}
-
-	c.Connects = result.Connects
-	return nil
 }
 
-func (c *Connections) GetConnectionsAlias() []string {
+func (c *Connections) GetConnectionsAlias(jsonData string) []string {
+	c.ReadJsonData(jsonData)
+
 	var result []string
 
 	for _, conn := range c.Connects {
@@ -35,4 +33,19 @@ func (c *Connections) GetConnectionsAlias() []string {
 	}
 
 	return result
+}
+
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	dataConnectsInFile := ReadFile()
+	c.ReadJsonData(dataConnectsInFile)
+
+	c.Connects = append(c.Connects, connect)
+
+	newDataConnect, err := json.MarshalIndent(&c, "", " ")
+
+	if err != nil {
+		output.GetOutError("Ошибка записи json")
+	}
+
+	WriteFile(newDataConnect)
 }

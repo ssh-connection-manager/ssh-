@@ -10,7 +10,7 @@ func getPathToFile() string {
 		os.Getenv("NAME_FILE")
 }
 
-func GetFullPath() (string, error) {
+func getFullPath() (string, error) {
 	homePath, err := os.UserHomeDir()
 	if err != nil {
 		return "", err

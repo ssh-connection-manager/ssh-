@@ -1,21 +1,25 @@
 package list
 
 import (
-	"encoding/json"
 	"ssh+/app/file"
-	"ssh+/output"
 )
 
-func GetConnectList() []string {
-	fileConnects := file.ReadFile()
+func GetConnectsList() []string {
+	var connections file.Connections
+	dataConnectsInFile := file.ReadFile()
+
+	return connections.GetConnectionsAlias(dataConnectsInFile)
+}
+
+func AddConnect(alias, address, login, password string) {
 	var connections file.Connections
 
-	err := json.Unmarshal([]byte(fileConnects), &connections)
-	if err != nil {
-		output.GetOutError("пустой файл")
+	connect := file.Connect{
+		Alias:    alias,
+		Address:  address,
+		Login:    login,
+		Password: password,
 	}
 
-	result := connections.GetConnectionsAlias()
-
-	return result
+	connections.WriteConnectToJson(connect)
 }

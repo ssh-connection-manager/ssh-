@@ -6,10 +6,11 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"ssh+/output"
 )
 
 func CreateFile() {
-	filePath, err := GetFullPath()
+	filePath, err := getFullPath()
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +33,7 @@ func CreateFile() {
 }
 
 func ReadFile() string {
-	path, err := GetFullPath()
+	path, err := getFullPath()
 	if err != nil {
 		panic(err)
 	}
@@ -49,4 +50,17 @@ func ReadFile() string {
 	}
 
 	return string(fContent)
+}
+
+func WriteFile(rowData []byte) {
+	path, err := getFullPath()
+	if err != nil {
+		panic(err)
+	}
+
+	err = ioutil.WriteFile(path, rowData, 0)
+
+	if err != nil {
+		output.GetOutError("ошибка при записи в файл")
+	}
 }
