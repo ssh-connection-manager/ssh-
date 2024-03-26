@@ -2,6 +2,7 @@ package file
 
 import (
 	"encoding/json"
+	"fmt"
 	"ssh+/app/output"
 )
 
@@ -23,18 +24,6 @@ func (c *Connections) ReadJsonData(jsonData string) {
 	}
 }
 
-func (c *Connections) GetConnectionsAlias(jsonData string) []string {
-	c.ReadJsonData(jsonData)
-
-	var result []string
-
-	for _, conn := range c.Connects {
-		result = append(result, conn.Alias)
-	}
-
-	return result
-}
-
 func (c *Connections) WriteConnectToJson(connect Connect) {
 	dataConnectsInFile := ReadFile()
 	c.ReadJsonData(dataConnectsInFile)
@@ -48,4 +37,11 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 	}
 
 	WriteFile(newDataConnect)
+}
+
+func (c *Connections) DeleteConnectToJson() {
+	dataConnectsInFile := ReadFile()
+	c.ReadJsonData(dataConnectsInFile)
+
+	fmt.Println(c)
 }
