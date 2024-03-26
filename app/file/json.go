@@ -2,6 +2,7 @@ package file
 
 import (
 	"encoding/json"
+	"ssh+/app/output"
 )
 
 type Connections struct {
@@ -15,24 +16,44 @@ type Connect struct {
 	Password string `json:"password"`
 }
 
-func (c *Connections) UnmarshalJSON(data []byte) error {
-	type connections Connections
-	var result connections
+func (c *Connections) serializationJson(dataConnectsInFile string) {
+	err := json.Unmarshal([]byte(dataConnectsInFile), &c)
 
-	if err := json.Unmarshal(data, &result); err != nil {
-		return err
+	if err != nil {
+		output.GetOutError("Ошибка сериализации json")
 	}
-
-	c.Connects = result.Connects
-	return nil
 }
 
-func (c *Connections) GetConnectionsAlias() []string {
-	var result []string
+func (c *Connections) deserializationJson() []byte {
+	newDataConnect, err := json.MarshalIndent(&c, "", " ")
 
-	for _, conn := range c.Connects {
-		result = append(result, conn.Alias)
+	if err != nil {
+		output.GetOutError("Ошибка десиарилизации json")
 	}
 
-	return result
+	return newDataConnect
+}
+
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	c.serializationJson(ReadFile())
+
+	c.Connects = append(c.Connects, connect)
+
+	WriteFile(c.deserializationJson())
+}
+
+func (c *Connections) DeleteConnectToJson(alias string) {
+	c.serializationJson(ReadFile())
+
+	for i, v := range c.Connects {
+		if v.Alias == alias {
+			c.deleteJsonDataByIndex(i)
+
+			WriteFile(c.deserializationJson())
+
+			return
+		}
+	}
+
+	output.GetOutError("Не найдено подключение")
 }
