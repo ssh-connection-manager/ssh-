@@ -2,7 +2,7 @@ package file
 
 import (
 	"encoding/json"
-	"ssh+/output"
+	"ssh+/app/output"
 )
 
 type Connections struct {

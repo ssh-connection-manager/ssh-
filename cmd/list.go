@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"ssh+/app/list"
-	"ssh+/output"
+	"ssh+/app/output"
 )
 
 var listCmd = &cobra.Command{
