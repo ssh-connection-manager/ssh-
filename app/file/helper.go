@@ -4,6 +4,18 @@ import (
 	"os"
 )
 
+func (c *Connections) GetConnectionsAlias(jsonData string) []string {
+	c.ReadJsonData(jsonData)
+
+	var result []string
+
+	for _, conn := range c.Connects {
+		result = append(result, conn.Alias)
+	}
+
+	return result
+}
+
 func getPathToFile() string {
 	return os.Getenv("PATH_FILE") +
 		os.Getenv("SEPARATOR") +
