@@ -13,7 +13,7 @@ var listCmd = &cobra.Command{
 	Long: `Данная команда выводит список ваших добавленных соедениний по ssh, 
 	в случае его отсутвия попросит добавить подключения`,
 	Run: func(cmd *cobra.Command, args []string) {
-		list := list.GetConnectList()
+		list := list.GetConnectsList()
 
 		fmt.Println("Список ваших подключений:")
 
