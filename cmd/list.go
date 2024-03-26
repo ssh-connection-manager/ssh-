@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"ssh+/app/list"
 	"ssh+/app/output"
+	"ssh+/cmd/list"
 )
 
 var listCmd = &cobra.Command{
