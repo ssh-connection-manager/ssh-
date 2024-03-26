@@ -4,8 +4,8 @@ import (
 	"os"
 )
 
-func (c *Connections) GetConnectionsAlias(jsonData string) []string {
-	c.ReadJsonData(jsonData)
+func (c *Connections) GetConnectionsAlias() []string {
+	c.serializeJson()
 
 	var result []string
 
@@ -14,6 +14,13 @@ func (c *Connections) GetConnectionsAlias(jsonData string) []string {
 	}
 
 	return result
+}
+
+func (c *Connections) deleteJsonDataByIndex(index int) {
+	copy(c.Connects[index:], c.Connects[index+1:])
+
+	c.Connects[len(c.Connects)-1] = Connect{}
+	c.Connects = c.Connects[:len(c.Connects)-1]
 }
 
 func getPathToFile() string {
