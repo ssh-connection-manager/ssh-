@@ -5,7 +5,7 @@ import (
 )
 
 func (c *Connections) GetConnectionsAlias() []string {
-	c.serializeJson()
+	c.serializationJson(ReadFile())
 
 	var result []string
 
