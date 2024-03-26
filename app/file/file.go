@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"ssh+/output"
+	"ssh+/app/output"
 )
 
 func CreateFile() {

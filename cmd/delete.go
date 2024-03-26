@@ -1,28 +1,21 @@
 package cmd
 
 import (
-	"fmt"
+	del "ssh+/cmd/delete"
+
 	"github.com/spf13/cobra"
-	"ssh+/app/output"
-	"ssh+/cmd/list"
 )
 
-var listCmd = &cobra.Command{
-	Use:   "list",
+var deleteCmd = &cobra.Command{
+	Use:   "delete",
 	Short: "Вывод подключенных ssh соединений",
 	Long: `Данная команда выводит список ваших добавленных соедениний по ssh, 
 	в случае его отсутвия попросит добавить подключения`,
 	Run: func(cmd *cobra.Command, args []string) {
-		list := list.GetConnectsList()
-
-		fmt.Println("Список ваших подключений:")
-
-		for _, v := range list {
-			output.GetOutSuccess(v)
-		}
+		del.DeleteConnect()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(listCmd)
+	rootCmd.AddCommand(deleteCmd)
 }
