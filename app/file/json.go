@@ -16,7 +16,7 @@ type Connect struct {
 	Password string `json:"password"`
 }
 
-func (c *Connections) serializationJson(dataConnectsInFile string) {
+func (c *Connections) SerializationJson(dataConnectsInFile string) {
 	err := json.Unmarshal([]byte(dataConnectsInFile), &c)
 
 	if err != nil {
@@ -35,7 +35,7 @@ func (c *Connections) deserializationJson() []byte {
 }
 
 func (c *Connections) WriteConnectToJson(connect Connect) {
-	c.serializationJson(ReadFile())
+	c.SerializationJson(ReadFile())
 
 	c.Connects = append(c.Connects, connect)
 
@@ -43,7 +43,7 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 }
 
 func (c *Connections) DeleteConnectToJson(alias string) {
-	c.serializationJson(ReadFile())
+	c.SerializationJson(ReadFile())
 
 	for i, v := range c.Connects {
 		if v.Alias == alias {
