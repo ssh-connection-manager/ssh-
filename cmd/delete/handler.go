@@ -2,8 +2,8 @@ package delete
 
 import "ssh+/app/file"
 
-func DeleteConnect() {
+func DeleteConnect(alias string) {
 	var connects file.Connections
 
-	connects.DeleteConnectToJson("test5")
+	connects.DeleteConnectToJson(alias)
 }
