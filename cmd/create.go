@@ -31,7 +31,12 @@ to quickly create a Cobra application.`,
 
 		for name, arg := range arguments {
 			input = textinput.New(name)
-			input.Placeholder = name + "не должен быть пустым"
+
+			if name == "Пароль" {
+				input.Hidden = true
+			}
+
+			input.Placeholder = " " + string(name) + " не должен быть пустым"
 
 			*arg, err = input.RunPrompt()
 
