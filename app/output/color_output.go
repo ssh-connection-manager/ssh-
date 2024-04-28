@@ -5,9 +5,9 @@ import (
 	"os"
 )
 
-func GetOutSuccess(errName string) {
+func GetOutSuccess(successName string) {
 	green := color.New(color.BgGreen)
-	green.Println(errName)
+	green.Println(successName)
 }
 
 func GetOutError(errName string) {
