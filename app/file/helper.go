@@ -2,6 +2,7 @@ package file
 
 import (
 	"os"
+	"ssh+/app/output"
 )
 
 func (c *Connections) GetConnectionsAlias() []string {
@@ -11,6 +12,11 @@ func (c *Connections) GetConnectionsAlias() []string {
 
 	for _, conn := range c.Connects {
 		result = append(result, conn.Alias)
+	}
+
+	if len(result) == 0 {
+		output.GetOutError("Подключений не найдено")
+		os.Exit(1)
 	}
 
 	return result

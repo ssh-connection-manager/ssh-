@@ -1,14 +1,14 @@
 package cmd
 
 import (
+	"os"
+
+	"ssh+/app/file"
 	"ssh+/app/output"
+	"ssh+/view"
+
 	del "ssh+/cmd/delete"
 
-	"fmt"
-	"os"
-	"ssh+/app/file"
-
-	"github.com/erikgeiser/promptkit/selection"
 	"github.com/spf13/cobra"
 )
 
@@ -19,33 +19,22 @@ var deleteCmd = &cobra.Command{
 	в случае его отсутвия попросит добавить подключения`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects file.Connections
+
 		aliases := connects.GetConnectionsAlias()
 
-		if len(aliases) == 0 {
-			output.GetOutError("Подключений не найдено")
-			os.Exit(1)
+		customChoice := view.Select{
+			FilterPlaceholder: os.Getenv("DELETE_FILTER_PLACEHOLDER"),
+			SelectionPrompt:   os.Getenv("DELETE_SELECTION_PROMPT"),
+			FilterPrompt:      os.Getenv("DELETE_FILTER_PROMPT"),
+			Template:          os.Getenv("DELETE_SELECT_TEMPLATE"),
+			PageSize:          os.Getenv("DELETE_PAGE_SIZE"),
 		}
 
-		aliases = append(connects.GetConnectionsAlias(), "exit")
-
-		sp := selection.New("Выбирите подключение для удаление", aliases)
-		sp.PageSize = 5
-		sp.FilterPlaceholder = ""
-
-		choice, err := sp.RunPrompt()
-		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-
-			os.Exit(1)
-		}
-
-		if choice == "exit" {
-			output.GetOutSuccess("Вы успешно вышли")
-			os.Exit(1)
-		}
+		choice := customChoice.SelectedValue(aliases)
 
 		del.DeleteConnect(choice)
-		fmt.Println("подключение удалено")
+
+		output.GetOutSuccess("подключение удалено")
 	},
 }
 
