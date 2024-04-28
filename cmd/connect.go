@@ -1,14 +1,11 @@
 package cmd
 
 import (
-	"fmt"
-	"github.com/erikgeiser/promptkit/selection"
-	"github.com/muesli/termenv"
 	"github.com/spf13/cobra"
 	"os"
 	"ssh+/app/file"
 	"ssh+/cmd/connect"
-	"strings"
+	"ssh+/view"
 )
 
 var ConnectCmd = &cobra.Command{
@@ -18,57 +15,18 @@ var ConnectCmd = &cobra.Command{
 	в случае его отсутвия попросит добавить подключения`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects file.Connections
+
 		aliases := connects.GetConnectionsAlias()
 
-		const (
-			customTemplate = `
-{{- if .Prompt -}}
-  {{ Bold .Prompt }}
-{{ end -}}
-
-{{ if .IsFiltered }}
-  {{- print .FilterPrompt " " .FilterInput }}
-{{ end }}
-
-{{- range  $i, $choice := .Choices }}
-  {{- if IsScrollUpHintPosition $i }}
-    {{- print "⇡ " -}}
-  {{- else if IsScrollDownHintPosition $i -}}
-    {{- print "⇣ " -}} 
-  {{- else -}}
-    {{- print "  " -}}
-  {{- end -}} 
-
-  {{- if eq $.SelectedIndex $i }}
-   {{- print (Foreground "201" (Bold "▸ ")) (Selected $choice) "\n" }}
-  {{- else }}
-    {{- print " " (Unselected $choice) "\n" }}
-  {{- end }}
-{{- end}}`
-		)
-
-		sp := selection.New("Выбор подключения", aliases)
-		sp.PageSize = 5
-		sp.FilterPlaceholder = " введите название подключения"
-		sp.FilterPrompt = "Поиск по алиуса:"
-		sp.Template = customTemplate
-		sp.Filter = func(filter string, choice *selection.Choice[string]) bool {
-			return strings.HasPrefix(choice.Value, filter)
+		customChoice := view.Select{
+			FilterPlaceholder: os.Getenv("CONNECT_FILTER_PLACEHOLDER"),
+			SelectionPrompt:   os.Getenv("CONNECT_SELECTION_PROMPT"),
+			FilterPrompt:      os.Getenv("CONNECT_FILTER_PROMPT"),
+			Template:          os.Getenv("CONNECT_SELECT_TEMPLATE"),
+			PageSize:          os.Getenv("CONNECT_PAGE_SIZE"),
 		}
 
-		blue := termenv.String().Foreground(termenv.ANSI256Color(206))
-
-		sp.SelectedChoiceStyle = func(c *selection.Choice[string]) string {
-			return blue.Bold().Styled(c.Value)
-		}
-
-		choice, err := sp.RunPrompt()
-
-		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-
-			os.Exit(1)
-		}
+		choice := customChoice.SelectedValue(aliases)
 
 		connect.ConsoleConnect(choice)
 	},
