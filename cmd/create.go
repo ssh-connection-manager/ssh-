@@ -25,8 +25,8 @@ var createCmd = &cobra.Command{
 		hiddenArgs := []*string{&password}
 
 		customTextInput := view.TextInput{
+			Placeholder: create.Placeholder,
 			HiddenArgs:  hiddenArgs,
-			Placeholder: " не должен быть пустым",
 		}
 
 		customTextInput.DrawInput(arguments)

@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"os"
-
 	"ssh+/app/file"
 	"ssh+/cmd/connect"
 	"ssh+/view"
@@ -20,11 +18,11 @@ var ConnectCmd = &cobra.Command{
 		aliases := connects.GetConnectionsAlias()
 
 		customChoice := view.Select{
-			FilterPlaceholder: os.Getenv("CONNECT_FILTER_PLACEHOLDER"),
-			SelectionPrompt:   os.Getenv("CONNECT_SELECTION_PROMPT"),
-			FilterPrompt:      os.Getenv("CONNECT_FILTER_PROMPT"),
-			Template:          os.Getenv("CONNECT_SELECT_TEMPLATE"),
-			PageSize:          os.Getenv("CONNECT_PAGE_SIZE"),
+			FilterPlaceholder: connect.FilterPlaceholder,
+			SelectionPrompt:   connect.SelectionPrompt,
+			FilterPrompt:      connect.FilterPrompt,
+			Template:          connect.Template,
+			PageSize:          connect.PageSize,
 		}
 
 		choice := customChoice.SelectedValue(aliases)

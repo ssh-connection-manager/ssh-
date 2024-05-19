@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"os"
-
 	"ssh+/app/file"
 	"ssh+/app/output"
 	"ssh+/view"
@@ -22,11 +20,11 @@ var deleteCmd = &cobra.Command{
 		aliases := connects.GetConnectionsAlias()
 
 		customChoice := view.Select{
-			FilterPlaceholder: os.Getenv("DELETE_FILTER_PLACEHOLDER"),
-			SelectionPrompt:   os.Getenv("DELETE_SELECTION_PROMPT"),
-			FilterPrompt:      os.Getenv("DELETE_FILTER_PROMPT"),
-			Template:          os.Getenv("DELETE_SELECT_TEMPLATE"),
-			PageSize:          os.Getenv("DELETE_PAGE_SIZE"),
+			FilterPlaceholder: del.FilterPlaceholder,
+			SelectionPrompt:   del.SelectionPrompt,
+			FilterPrompt:      del.FilterPrompt,
+			Template:          del.Template,
+			PageSize:          del.PageSize,
 		}
 
 		choice := customChoice.SelectedValue(aliases)
