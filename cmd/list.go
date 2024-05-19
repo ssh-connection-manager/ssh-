@@ -2,16 +2,17 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
+
 	"ssh+/app/output"
 	"ssh+/cmd/list"
+
+	"github.com/spf13/cobra"
 )
 
 var listCmd = &cobra.Command{
-	Use:   "list",
-	Short: "Вывод подключенных ssh соединений",
-	Long: `Данная команда выводит список ваших добавленных соедениний по ssh, 
-	в случае его отсутвия попросит добавить подключения`,
+	Use:   list.Use,
+	Short: list.Short,
+	Long:  list.Long,
 	Run: func(cmd *cobra.Command, args []string) {
 		list := list.GetConnectsList()
 

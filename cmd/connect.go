@@ -1,18 +1,19 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"os"
+
 	"ssh+/app/file"
 	"ssh+/cmd/connect"
 	"ssh+/view"
+
+	"github.com/spf13/cobra"
 )
 
 var ConnectCmd = &cobra.Command{
-	Use:   "connect",
-	Short: "Вывод подключенных ssh соединений",
-	Long: `Данная команда выводит список ваших добавленных соедениний по ssh, 
-	в случае его отсутвия попросит добавить подключения`,
+	Use:   connect.Use,
+	Short: connect.Short,
+	Long:  connect.Long,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects file.Connections
 
