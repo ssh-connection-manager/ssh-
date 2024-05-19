@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"fmt"
-	"github.com/erikgeiser/promptkit/textinput"
-	"github.com/spf13/cobra"
-	"os"
+	"ssh+/app/output"
 	"ssh+/cmd/create"
+	"ssh+/view"
+
+	"github.com/spf13/cobra"
 )
 
 var createCmd = &cobra.Command{
@@ -14,8 +14,6 @@ var createCmd = &cobra.Command{
 	Long:  create.Long,
 	Run: func(cmd *cobra.Command, args []string) {
 		var alias, address, login, password string
-		var input *textinput.TextInput
-		var err error
 
 		arguments := map[string]*string{
 			"Алиас":  &alias,
@@ -24,26 +22,18 @@ var createCmd = &cobra.Command{
 			"Пароль": &password,
 		}
 
-		for name, arg := range arguments {
-			input = textinput.New(name)
+		hiddenArgs := []*string{&password}
 
-			if name == "Пароль" {
-				input.Hidden = true
-			}
-
-			input.Placeholder = " " + string(name) + " не должен быть пустым"
-
-			*arg, err = input.RunPrompt()
-
-			if err != nil {
-				fmt.Printf("Error: %v\n", err)
-				os.Exit(1)
-			}
+		customTextInput := view.TextInput{
+			HiddenArgs:  hiddenArgs,
+			Placeholder: " не должен быть пустым",
 		}
+
+		customTextInput.DrawInput(arguments)
 
 		create.CreateConnect(alias, address, login, password)
 
-		fmt.Println("create called")
+		output.GetOutSuccess("create called")
 	},
 }
 
