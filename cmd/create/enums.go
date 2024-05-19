@@ -1,8 +1,8 @@
 package create
 
 const (
-	Use   = `create`
-	Short = `Создает подключение`
-	Long  = `Данная команда создает подключения, 
+	UseCommand       = `create`
+	ShortDescription = `Создает подключение`
+	LongDescription  = `Данная команда создает подключения, 
 которые вы сможете переиспользовать при подключении по ssh`
 )

@@ -11,9 +11,9 @@ import (
 )
 
 var ConnectCmd = &cobra.Command{
-	Use:   connect.Use,
-	Short: connect.Short,
-	Long:  connect.Long,
+	Use:   connect.UseCommand,
+	Short: connect.ShortDescription,
+	Long:  connect.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects file.Connections
 
