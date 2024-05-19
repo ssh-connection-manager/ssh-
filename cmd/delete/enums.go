@@ -1,7 +1,7 @@
 package delete
 
 const (
-	Use   = `delete`
-	Short = `Удаление подключение по алиасу`
-	Long  = `Данная команда позволяет удалить подключение по алиасу`
+	UseCommand       = `delete`
+	ShortDescription = `Удаление подключение по алиасу`
+	LongDescription  = `Данная команда позволяет удалить подключение по алиасу`
 )
