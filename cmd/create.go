@@ -9,9 +9,9 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:   create.Use,
-	Short: create.Short,
-	Long:  create.Long,
+	Use:   create.UseCommand,
+	Short: create.ShortDescription,
+	Long:  create.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 		var alias, address, login, password string
 

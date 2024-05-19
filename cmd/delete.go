@@ -13,9 +13,9 @@ import (
 )
 
 var deleteCmd = &cobra.Command{
-	Use:   del.Use,
-	Short: del.Short,
-	Long:  del.Long,
+	Use:   del.UseCommand,
+	Short: del.ShortDescription,
+	Long:  del.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects file.Connections
 

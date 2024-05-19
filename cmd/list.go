@@ -10,9 +10,9 @@ import (
 )
 
 var listCmd = &cobra.Command{
-	Use:   list.Use,
-	Short: list.Short,
-	Long:  list.Long,
+	Use:   list.UseCommand,
+	Short: list.ShortDescription,
+	Long:  list.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 		list := list.GetConnectsList()
 
