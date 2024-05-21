@@ -1,12 +1,14 @@
 package view
 
 import (
-	"github.com/erikgeiser/promptkit/selection"
-	"github.com/muesli/termenv"
 	"os"
-	"ssh+/app/output"
 	"strconv"
 	"strings"
+
+	"ssh+/app/output"
+
+	"github.com/erikgeiser/promptkit/selection"
+	"github.com/muesli/termenv"
 )
 
 type Select struct {
