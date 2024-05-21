@@ -1,8 +1,9 @@
 package output
 
 import (
-	"github.com/fatih/color"
 	"os"
+
+	"github.com/fatih/color"
 )
 
 func GetOutSuccess(successName string) {
