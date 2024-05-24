@@ -6,6 +6,8 @@ import (
 )
 
 func init() {
+	inits.LoadEnv()
+	inits.GenerateCryptKey()
 	inits.CreateFileConnects()
 }
 
