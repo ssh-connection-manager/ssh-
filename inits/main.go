@@ -1,16 +1,23 @@
 package inits
 
 import (
-	"ssh+/app/file"
-
 	"github.com/joho/godotenv"
+	"os"
+	"ssh+/app/encrypt"
+	"ssh+/app/file"
 )
 
-func CreateFileConnects() {
+func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
 	}
+}
 
-	file.CreateFile()
+func GenerateCryptKey() {
+	encrypt.GenerateKey()
+}
+
+func CreateFileConnects() {
+	file.GenerateFile(os.Getenv("FILE_NAME_CONNECTS"))
 }
