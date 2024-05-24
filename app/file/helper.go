@@ -7,7 +7,12 @@ import (
 )
 
 func (c *Connections) GetConnectionsAlias() []string {
-	c.SerializationJson(ReadFile())
+	filePath, err := GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	if err != nil {
+		output.GetOutError("Ошибка получения путя к файлу")
+	}
+
+	c.SerializationJson(ReadFile(filePath))
 
 	var result []string
 
@@ -17,7 +22,6 @@ func (c *Connections) GetConnectionsAlias() []string {
 
 	if len(result) == 0 {
 		output.GetOutError("Подключений не найдено")
-		os.Exit(1)
 	}
 
 	return result
@@ -31,17 +35,24 @@ func (c *Connections) deleteJsonDataByIndex(index int) {
 }
 
 func getPathToFile() string {
-	return os.Getenv("PATH_FILE") +
-		os.Getenv("SEPARATOR") +
-		os.Getenv("NAME_FILE")
+	return os.Getenv("PATH_FILE") + os.Getenv("SEPARATOR")
 }
 
-func getFullPath() (string, error) {
+func GetFullPath(fileName string) (string, error) {
 	homePath, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
 
-	path := homePath + getPathToFile()
+	path := homePath + getPathToFile() + fileName
 	return path, nil
+}
+
+func GenerateFile(filename string) {
+	filePath, err := GetFullPath(filename)
+	if err != nil {
+		output.GetOutError("Ошибка получения файла")
+	}
+
+	CreateFile(filePath)
 }

@@ -10,7 +10,12 @@ import (
 )
 
 func Connect(c *file.Connections, alias string) {
-	c.SerializationJson(file.ReadFile())
+	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	if err != nil {
+		output.GetOutError("Ошибка получения путя к файлу")
+	}
+
+	c.SerializationJson(file.ReadFile(filePath))
 
 	for _, v := range c.Connects {
 		if v.Alias == alias {

@@ -2,6 +2,7 @@ package file
 
 import (
 	"encoding/json"
+	"os"
 
 	"ssh+/app/output"
 )
@@ -35,22 +36,41 @@ func (c *Connections) deserializationJson() []byte {
 	return newDataConnect
 }
 
+func getPathToConnectFile() string {
+	fullPath, err := GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	if err != nil {
+		panic(err)
+	}
+
+	return fullPath
+}
+
 func (c *Connections) WriteConnectToJson(connect Connect) {
-	c.SerializationJson(ReadFile())
+	filePath, err := GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	if err != nil {
+		output.GetOutError("Ошибка получения путя к файлу")
+	}
+
+	c.SerializationJson(ReadFile(filePath))
 
 	c.Connects = append(c.Connects, connect)
 
-	WriteFile(c.deserializationJson())
+	WriteFile(getPathToConnectFile(), c.deserializationJson())
 }
 
 func (c *Connections) DeleteConnectToJson(alias string) {
-	c.SerializationJson(ReadFile())
+	filePath, err := GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	if err != nil {
+		output.GetOutError("Ошибка получения путя к файлу")
+	}
+
+	c.SerializationJson(ReadFile(filePath))
 
 	for i, v := range c.Connects {
 		if v.Alias == alias {
 			c.deleteJsonDataByIndex(i)
 
-			WriteFile(c.deserializationJson())
+			WriteFile(getPathToConnectFile(), c.deserializationJson())
 
 			return
 		}
