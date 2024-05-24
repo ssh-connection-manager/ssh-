@@ -3,6 +3,7 @@ module ssh+
 go 1.21
 
 require (
+	github.com/AlexanderGrom/componenta v0.0.0-20180225195639-b173b6ed556d // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/bubbles v0.16.1 // indirect
