@@ -6,13 +6,31 @@ import (
 	"ssh+/app/output"
 )
 
-func (c *Connections) GetConnectionsAlias() []string {
-	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+type Connections struct {
+	Connects []Connect `json:"connects"`
+}
+
+type Connect struct {
+	Alias    string `json:"alias"`
+	Login    string `json:"login"`
+	Address  string `json:"address"`
+	Password string `json:"password"`
+}
+
+func getPathToConnectFile() string {
+	fullPath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
 	if err != nil {
-		output.GetOutError("Ошибка получения путя к файлу")
+		panic(err)
 	}
 
+	return fullPath
+}
+
+func (c *Connections) GetConnectionsAlias() []string {
+	filePath := getPathToConnectFile()
+
 	c.SerializationJson(file.ReadFile(filePath))
+	c.SetDecryptData()
 
 	var result []string
 
@@ -27,6 +45,16 @@ func (c *Connections) GetConnectionsAlias() []string {
 	return result
 }
 
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	filePath := getPathToConnectFile()
+	c.SerializationJson(file.ReadFile(filePath))
+
+	encodedConnect := SetCryptData(connect)
+	c.Connects = append(c.Connects, encodedConnect)
+
+	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
+}
+
 func (c *Connections) deleteJsonDataByIndex(index int) {
 	copy(c.Connects[index:], c.Connects[index+1:])
 
@@ -34,11 +62,21 @@ func (c *Connections) deleteJsonDataByIndex(index int) {
 	c.Connects = c.Connects[:len(c.Connects)-1]
 }
 
-func getPathToConnectFile() string {
-	fullPath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
-	if err != nil {
-		panic(err)
+func (c *Connections) DeleteConnectToJson(alias string) {
+	filePath := getPathToConnectFile()
+
+	c.SerializationJson(file.ReadFile(filePath))
+	c.SetDecryptData()
+
+	for i, v := range c.Connects {
+		if v.Alias == alias {
+			c.deleteJsonDataByIndex(i)
+
+			file.WriteFile(getPathToConnectFile(), c.deserializationJson())
+
+			return
+		}
 	}
 
-	return fullPath
+	output.GetOutError("Не найдено подключение")
 }
