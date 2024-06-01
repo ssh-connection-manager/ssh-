@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"ssh+/app/json"
 
 	"ssh+/app/file"
 	"ssh+/app/output"
 )
 
-func Connect(c *file.Connections, alias string) {
+func Connect(c *json.Connections, alias string) {
 	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
 	if err != nil {
 		output.GetOutError("Ошибка получения путя к файлу")
