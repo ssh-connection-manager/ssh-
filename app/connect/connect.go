@@ -17,6 +17,7 @@ func Connect(c *json.Connections, alias string) {
 	}
 
 	c.SerializationJson(file.ReadFile(filePath))
+	c.SetDecryptData()
 
 	for _, v := range c.Connects {
 		if v.Alias == alias {
