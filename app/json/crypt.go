@@ -1,8 +1,6 @@
 package json
 
 import (
-	"encoding/base64"
-	"fmt"
 	"ssh+/app/crypt"
 )
 
@@ -25,11 +23,7 @@ func decryptData(c Connect) Connect {
 }
 
 func (c *Connections) SetDecryptData() {
-	str := "123"
-	str1 := crypt.Encrypt(str)
-
-	for _, connect := range c.Connects {
-		fmt.Printf("str - %s, type str - %T\n\n alias - %s, str - %T", str1, connect.Alias, base64.StdEncoding.EncodeToString([]byte(connect.Alias)), connect.Alias)
-		connect = decryptData(connect)
+	for key, connect := range c.Connects {
+		c.Connects[key] = decryptData(connect)
 	}
 }
