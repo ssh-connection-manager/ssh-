@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"ssh+/app/file"
+	"ssh+/app/json"
 	"ssh+/cmd/connect"
 	"ssh+/view"
 
@@ -13,7 +13,7 @@ var ConnectCmd = &cobra.Command{
 	Short: connect.ShortDescription,
 	Long:  connect.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
-		var connects file.Connections
+		var connects json.Connections
 
 		aliases := connects.GetConnectionsAlias()
 

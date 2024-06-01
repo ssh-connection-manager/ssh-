@@ -1,11 +1,11 @@
 package list
 
 import (
-	"ssh+/app/file"
+	"ssh+/app/json"
 )
 
 func GetConnectsList() []string {
-	var connections file.Connections
+	var connections json.Connections
 
 	return connections.GetConnectionsAlias()
 }

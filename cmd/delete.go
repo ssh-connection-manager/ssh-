@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"ssh+/app/file"
+	"ssh+/app/json"
 	"ssh+/app/output"
 	"ssh+/view"
 
@@ -15,7 +15,7 @@ var deleteCmd = &cobra.Command{
 	Short: del.ShortDescription,
 	Long:  del.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
-		var connects file.Connections
+		var connects json.Connections
 
 		aliases := connects.GetConnectionsAlias()
 

@@ -6,42 +6,25 @@ import (
 	"ssh+/app/output"
 )
 
-func (c *Connections) GetConnectionsAlias() []string {
-	c.SerializationJson(ReadFile())
-
-	var result []string
-
-	for _, conn := range c.Connects {
-		result = append(result, conn.Alias)
-	}
-
-	if len(result) == 0 {
-		output.GetOutError("Подключений не найдено")
-		os.Exit(1)
-	}
-
-	return result
-}
-
-func (c *Connections) deleteJsonDataByIndex(index int) {
-	copy(c.Connects[index:], c.Connects[index+1:])
-
-	c.Connects[len(c.Connects)-1] = Connect{}
-	c.Connects = c.Connects[:len(c.Connects)-1]
-}
-
 func getPathToFile() string {
-	return os.Getenv("PATH_FILE") +
-		os.Getenv("SEPARATOR") +
-		os.Getenv("NAME_FILE")
+	return os.Getenv("PATH_FILE") + os.Getenv("SEPARATOR")
 }
 
-func getFullPath() (string, error) {
+func GetFullPath(fileName string) (string, error) {
 	homePath, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
 
-	path := homePath + getPathToFile()
+	path := homePath + getPathToFile() + fileName
 	return path, nil
+}
+
+func GenerateFile(filename string) {
+	filePath, err := GetFullPath(filename)
+	if err != nil {
+		output.GetOutError("Ошибка получения файла")
+	}
+
+	CreateFile(filePath)
 }

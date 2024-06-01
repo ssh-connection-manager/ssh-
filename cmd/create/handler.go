@@ -1,11 +1,13 @@
 package create
 
-import "ssh+/app/file"
+import (
+	"ssh+/app/json"
+)
 
 func CreateConnect(alias, address, login, password string) {
-	var connections file.Connections
+	var connections json.Connections
 
-	connect := file.Connect{
+	connect := json.Connect{
 		Alias:    alias,
 		Address:  address,
 		Login:    login,
