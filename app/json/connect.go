@@ -2,8 +2,6 @@ package json
 
 import (
 	"errors"
-	"fmt"
-
 	"ssh+/app/file"
 	"ssh+/app/output"
 )
@@ -38,6 +36,16 @@ func (c *Connections) GetConnectionsAlias() []string {
 	return result
 }
 
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	filePath := GetPathToConnectFile()
+	c.SerializationJson(file.ReadFile(filePath))
+
+	encodedConnect := SetCryptData(connect)
+	c.Connects = append(c.Connects, encodedConnect)
+
+	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+}
+
 func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	var noFound = -1
 
@@ -45,6 +53,8 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 
 	c.SerializationJson(file.ReadFile(filePath))
 	c.SetDecryptData()
+
+	defer c.SetCryptAllData()
 
 	for i, v := range c.Connects {
 		if v.Alias == alias {
@@ -55,12 +65,28 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	return noFound, errors.New("not found")
 }
 
-func (c *Connections) WriteConnectToJson(connect Connect) {
-	filePath := GetPathToConnectFile()
-	c.SerializationJson(file.ReadFile(filePath))
+func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
+	if index >= 0 && index < len(c.Connects) {
+		c.Connects[index].Alias = connect.Alias
+		c.Connects[index].Address = connect.Address
+		c.Connects[index].Login = connect.Login
+		c.Connects[index].Password = connect.Password
+		return nil
+	}
 
-	encodedConnect := SetCryptData(connect)
-	c.Connects = append(c.Connects, encodedConnect)
+	return errors.New("Ошибка обновления подключения")
+}
+
+func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
+	index, err := c.ExistConnectJsonByIndex(alias)
+	if err != nil {
+		output.GetOutError("Не найдено подключение")
+	}
+
+	err = c.updateJsonDataByIndex(index, SetCryptData(connect))
+	if err != nil {
+		output.GetOutError("Ошибка обновления подключения")
+	}
 
 	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
@@ -79,37 +105,6 @@ func (c *Connections) DeleteConnectToJson(alias string) {
 	}
 
 	c.deleteJsonDataByIndex(index)
-
-	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
-}
-
-func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
-	fmt.Println(c.Connects)
-
-	if index >= 0 && index < len(c.Connects) {
-		c.Connects[index].Alias = connect.Alias
-		c.Connects[index].Address = connect.Address
-		c.Connects[index].Login = connect.Login
-		c.Connects[index].Password = connect.Password
-
-		fmt.Println(c.Connects)
-
-		return nil
-	} else {
-		return errors.New("Ошибка обновления подключения")
-	}
-}
-
-func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
-	index, err := c.ExistConnectJsonByIndex(alias)
-	if err != nil {
-		output.GetOutError("Не найдено подключение")
-	}
-
-	err = c.updateJsonDataByIndex(index, SetCryptData(connect))
-	if err != nil {
-		output.GetOutError("Ошибка обновления подключения")
-	}
 
 	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
