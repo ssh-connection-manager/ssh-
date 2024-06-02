@@ -1,7 +1,10 @@
 package json
 
 import (
+	"errors"
+	"fmt"
 	"os"
+
 	"ssh+/app/file"
 	"ssh+/app/output"
 )
@@ -55,6 +58,23 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
 }
 
+func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
+	var noFound = -1
+
+	filePath := getPathToConnectFile()
+
+	c.SerializationJson(file.ReadFile(filePath))
+	c.SetDecryptData()
+
+	for i, v := range c.Connects {
+		if v.Alias == alias {
+			return i, nil
+		}
+	}
+
+	return noFound, errors.New("not found")
+}
+
 func (c *Connections) deleteJsonDataByIndex(index int) {
 	copy(c.Connects[index:], c.Connects[index+1:])
 
@@ -63,20 +83,43 @@ func (c *Connections) deleteJsonDataByIndex(index int) {
 }
 
 func (c *Connections) DeleteConnectToJson(alias string) {
-	filePath := getPathToConnectFile()
-
-	c.SerializationJson(file.ReadFile(filePath))
-	c.SetDecryptData()
-
-	for i, v := range c.Connects {
-		if v.Alias == alias {
-			c.deleteJsonDataByIndex(i)
-
-			file.WriteFile(getPathToConnectFile(), c.deserializationJson())
-
-			return
-		}
+	index, err := c.ExistConnectJsonByIndex(alias)
+	if err != nil {
+		output.GetOutError("Не найдено подключение")
 	}
 
-	output.GetOutError("Не найдено подключение")
+	c.deleteJsonDataByIndex(index)
+
+	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
+}
+
+func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
+	fmt.Println(c.Connects)
+
+	if index >= 0 && index < len(c.Connects) {
+		c.Connects[index].Alias = connect.Alias
+		c.Connects[index].Address = connect.Address
+		c.Connects[index].Login = connect.Login
+		c.Connects[index].Password = connect.Password
+
+		fmt.Println(c.Connects)
+
+		return nil
+	} else {
+		return errors.New("Ошибка обновления подключения")
+	}
+}
+
+func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
+	index, err := c.ExistConnectJsonByIndex(alias)
+	if err != nil {
+		output.GetOutError("Не найдено подключение")
+	}
+
+	err = c.updateJsonDataByIndex(index, SetCryptData(connect))
+	if err != nil {
+		output.GetOutError("Ошибка обновления подключения")
+	}
+
+	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
 }
