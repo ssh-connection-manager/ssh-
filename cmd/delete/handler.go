@@ -4,7 +4,7 @@ import (
 	"ssh+/app/json"
 )
 
-func DeleteConnect(alias string) {
+func Connect(alias string) {
 	var connects json.Connections
 
 	connects.DeleteConnectToJson(alias)

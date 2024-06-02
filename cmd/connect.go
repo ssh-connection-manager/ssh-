@@ -27,7 +27,7 @@ var ConnectCmd = &cobra.Command{
 
 		choice := customChoice.SelectedValue(aliases)
 
-		connect.ConsoleConnect(choice)
+		connect.Ssh(choice)
 	},
 }
 

@@ -4,7 +4,7 @@ import (
 	"ssh+/app/json"
 )
 
-func CreateConnect(alias, address, login, password string) {
+func Connect(alias, address, login, password string) {
 	var connections json.Connections
 
 	connect := json.Connect{

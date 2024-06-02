@@ -10,7 +10,7 @@ import (
 	"ssh+/app/output"
 )
 
-func Connect(c *json.Connections, alias string) {
+func Ssh(c *json.Connections, alias string) {
 	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
 	if err != nil {
 		output.GetOutError("Ошибка получения путя к файлу")
