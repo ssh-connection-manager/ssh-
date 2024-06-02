@@ -4,7 +4,7 @@ import (
 	"ssh+/app/json"
 )
 
-func GetConnectsList() []string {
+func Show() []string {
 	var connections json.Connections
 
 	return connections.GetConnectionsAlias()

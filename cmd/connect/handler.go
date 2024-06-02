@@ -5,8 +5,8 @@ import (
 	"ssh+/app/json"
 )
 
-func ConsoleConnect(alias string) {
+func Ssh(alias string) {
 	var connections json.Connections
 
-	connect.Connect(&connections, alias)
+	connect.Ssh(&connections, alias)
 }

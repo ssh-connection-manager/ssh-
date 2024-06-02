@@ -31,7 +31,7 @@ var createCmd = &cobra.Command{
 
 		customTextInput.DrawInput(arguments)
 
-		create.CreateConnect(alias, address, login, password)
+		create.Connect(alias, address, login, password)
 
 		output.GetOutSuccess("create called")
 	},

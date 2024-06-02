@@ -29,7 +29,7 @@ var deleteCmd = &cobra.Command{
 
 		choice := customChoice.SelectedValue(aliases)
 
-		del.DeleteConnect(choice)
+		del.Connect(choice)
 
 		output.GetOutSuccess("подключение удалено")
 	},
