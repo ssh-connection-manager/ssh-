@@ -33,7 +33,7 @@ const (
 	{{- end -}}
 	
 	{{- if eq $.SelectedIndex $i }}
-		{{- print (Foreground "201" (Bold "× ")) (Selected $choice) "\n" }}
+		{{- print (Foreground "201" (Bold "▸ ")) (Selected $choice) "\n" }}
 	{{- else }}
 		{{- print " " (Unselected $choice) "\n" }}
 	{{- end }}
