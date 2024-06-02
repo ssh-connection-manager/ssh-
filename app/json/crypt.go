@@ -27,3 +27,9 @@ func (c *Connections) SetDecryptData() {
 		c.Connects[key] = decryptData(connect)
 	}
 }
+
+func (c *Connections) SetCryptAllData() {
+	for key, connect := range c.Connects {
+		c.Connects[key] = SetCryptData(connect)
+	}
+}
