@@ -3,7 +3,6 @@ package json
 import (
 	"errors"
 	"fmt"
-	"os"
 
 	"ssh+/app/file"
 	"ssh+/app/output"
@@ -20,17 +19,8 @@ type Connect struct {
 	Password string `json:"password"`
 }
 
-func getPathToConnectFile() string {
-	fullPath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
-	if err != nil {
-		panic(err)
-	}
-
-	return fullPath
-}
-
 func (c *Connections) GetConnectionsAlias() []string {
-	filePath := getPathToConnectFile()
+	filePath := GetPathToConnectFile()
 
 	c.SerializationJson(file.ReadFile(filePath))
 	c.SetDecryptData()
@@ -48,20 +38,10 @@ func (c *Connections) GetConnectionsAlias() []string {
 	return result
 }
 
-func (c *Connections) WriteConnectToJson(connect Connect) {
-	filePath := getPathToConnectFile()
-	c.SerializationJson(file.ReadFile(filePath))
-
-	encodedConnect := SetCryptData(connect)
-	c.Connects = append(c.Connects, encodedConnect)
-
-	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
-}
-
 func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	var noFound = -1
 
-	filePath := getPathToConnectFile()
+	filePath := GetPathToConnectFile()
 
 	c.SerializationJson(file.ReadFile(filePath))
 	c.SetDecryptData()
@@ -73,6 +53,16 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	}
 
 	return noFound, errors.New("not found")
+}
+
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	filePath := GetPathToConnectFile()
+	c.SerializationJson(file.ReadFile(filePath))
+
+	encodedConnect := SetCryptData(connect)
+	c.Connects = append(c.Connects, encodedConnect)
+
+	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
 
 func (c *Connections) deleteJsonDataByIndex(index int) {
@@ -90,7 +80,7 @@ func (c *Connections) DeleteConnectToJson(alias string) {
 
 	c.deleteJsonDataByIndex(index)
 
-	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
+	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
 
 func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
@@ -121,5 +111,5 @@ func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
 		output.GetOutError("Ошибка обновления подключения")
 	}
 
-	file.WriteFile(getPathToConnectFile(), c.deserializationJson())
+	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
