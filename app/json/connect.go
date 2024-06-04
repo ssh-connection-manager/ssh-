@@ -36,16 +36,6 @@ func (c *Connections) GetConnectionsAlias() []string {
 	return result
 }
 
-func (c *Connections) WriteConnectToJson(connect Connect) {
-	filePath := GetPathToConnectFile()
-	c.SerializationJson(file.ReadFile(filePath))
-
-	encodedConnect := SetCryptData(connect)
-	c.Connects = append(c.Connects, encodedConnect)
-
-	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
-}
-
 func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	var noFound = -1
 
@@ -63,6 +53,21 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	}
 
 	return noFound, errors.New("not found")
+}
+
+func (c *Connections) WriteConnectToJson(connect Connect) {
+	_, err := c.ExistConnectJsonByIndex(connect.Alias)
+	if err == nil {
+		output.GetOutError("Алиас должен быть уникальным")
+	}
+
+	filePath := GetPathToConnectFile()
+	c.SerializationJson(file.ReadFile(filePath))
+
+	encodedConnect := SetCryptData(connect)
+	c.Connects = append(c.Connects, encodedConnect)
+
+	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
 }
 
 func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
