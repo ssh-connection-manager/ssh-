@@ -15,11 +15,16 @@ var createCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var alias, address, login, password string
 
-		arguments := map[string]*string{
-			"Алиас":  &alias,
-			"Адресс": &address,
-			"Логин":  &login,
-			"Пароль": &password,
+		nameAlias := "Алиас"
+		nameAddress := "Адресс"
+		nameLogin := "Логин"
+		namePassword := "Пароль"
+
+		var arguments = [][]*string{
+			{&nameAlias, &alias},
+			{&nameAddress, &address},
+			{&nameLogin, &login},
+			{&namePassword, &password},
 		}
 
 		hiddenArgs := []*string{&password}
