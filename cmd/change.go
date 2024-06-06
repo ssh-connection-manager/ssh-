@@ -31,16 +31,11 @@ var changeCmd = &cobra.Command{
 
 		change.ExistByIndex(choice)
 
-		nameAlias := "Алиас"
-		nameAddress := "Адресс"
-		nameLogin := "Логин"
-		namePassword := "Пароль"
-
 		arguments := [][]*string{
-			{&nameAlias, &alias},
-			{&nameAddress, &address},
-			{&nameLogin, &login},
-			{&namePassword, &password},
+			{&change.NameAlias, &alias},
+			{&change.NameAddress, &address},
+			{&change.NameLogin, &login},
+			{&change.NamePassword, &password},
 		}
 
 		hiddenArgs := []*string{&password}
@@ -48,9 +43,10 @@ var changeCmd = &cobra.Command{
 		customTextInput := view.TextInput{
 			Placeholder: change.Placeholder,
 			HiddenArgs:  hiddenArgs,
+			Arguments:   arguments,
 		}
 
-		customTextInput.DrawInput(arguments)
+		customTextInput.DrawInput()
 
 		change.Connect(choice, alias, address, login, password)
 

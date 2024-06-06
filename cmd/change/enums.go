@@ -43,3 +43,10 @@ const (
 const (
 	Placeholder = " не должен быть пустым"
 )
+
+var (
+	NameAlias    = "Алиас"
+	NameAddress  = "Адресс"
+	NameLogin    = "Логин"
+	NamePassword = "Пароль"
+)

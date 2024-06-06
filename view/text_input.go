@@ -10,6 +10,7 @@ import (
 )
 
 type TextInput struct {
+	Arguments   [][]*string
 	HiddenArgs  []*string
 	Placeholder string
 }
@@ -18,11 +19,11 @@ func (t TextInput) currentPlaceholder(name string) string {
 	return os.Getenv("SPACE") + name + t.Placeholder
 }
 
-func (t TextInput) DrawInput(arguments [][]*string) {
+func (t TextInput) DrawInput() {
 	var input *textinput.TextInput
 	var err error
 
-	for _, arg := range arguments {
+	for _, arg := range t.Arguments {
 		input = textinput.New(*arg[0])
 
 		hiddenInput := slices.Contains(t.HiddenArgs, arg[1])
