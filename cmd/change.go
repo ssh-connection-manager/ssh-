@@ -31,11 +31,16 @@ var changeCmd = &cobra.Command{
 
 		change.ExistByIndex(choice)
 
-		arguments := map[string]*string{
-			"Алиас":  &alias,
-			"Адресс": &address,
-			"Логин":  &login,
-			"Пароль": &password,
+		nameAlias := "Алиас"
+		nameAddress := "Адресс"
+		nameLogin := "Логин"
+		namePassword := "Пароль"
+
+		arguments := [][]*string{
+			{&nameAlias, &alias},
+			{&nameAddress, &address},
+			{&nameLogin, &login},
+			{&namePassword, &password},
 		}
 
 		hiddenArgs := []*string{&password}
