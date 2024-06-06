@@ -15,11 +15,11 @@ var createCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var alias, address, login, password string
 
-		arguments := map[string]*string{
-			"Алиас":  &alias,
-			"Адресс": &address,
-			"Логин":  &login,
-			"Пароль": &password,
+		var arguments = [][]*string{
+			{&create.NameAlias, &alias},
+			{&create.NameAddress, &address},
+			{&create.NameLogin, &login},
+			{&create.NamePassword, &password},
 		}
 
 		hiddenArgs := []*string{&password}
@@ -27,9 +27,10 @@ var createCmd = &cobra.Command{
 		customTextInput := view.TextInput{
 			Placeholder: create.Placeholder,
 			HiddenArgs:  hiddenArgs,
+			Arguments:   arguments,
 		}
 
-		customTextInput.DrawInput(arguments)
+		customTextInput.DrawInput()
 
 		create.Connect(alias, address, login, password)
 
