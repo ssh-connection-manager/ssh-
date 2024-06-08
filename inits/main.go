@@ -4,6 +4,7 @@ import (
 	"os"
 	"ssh+/app/crypt"
 	"ssh+/app/file"
+	"ssh+/app/json"
 
 	"github.com/joho/godotenv"
 )
@@ -21,4 +22,5 @@ func GenerateCryptKey() {
 
 func CreateFileConnects() {
 	file.GenerateFile(os.Getenv("FILE_NAME_CONNECTS"))
+	json.CreateBaseJsonDataToFile()
 }

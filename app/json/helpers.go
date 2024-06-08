@@ -2,6 +2,7 @@ package json
 
 import (
 	"os"
+
 	"ssh+/app/file"
 )
 
@@ -12,4 +13,12 @@ func GetPathToConnectFile() string {
 	}
 
 	return fullPath
+}
+
+func CreateBaseJsonDataToFile() {
+	connections := Connections{
+		Connects: []Connect{},
+	}
+
+	file.WriteFile(GetPathToConnectFile(), connections.deserializationJson())
 }
