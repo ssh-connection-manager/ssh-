@@ -67,7 +67,7 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 	encodedConnect := SetCryptData(connect)
 	c.Connects = append(c.Connects, encodedConnect)
 
-	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+	file.WriteFile(filePath, c.deserializationJson())
 }
 
 func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
