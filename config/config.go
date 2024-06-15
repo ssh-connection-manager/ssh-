@@ -10,28 +10,37 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Generate() {
-	configHome := FullPath
-	configName := NameFile
-	configType := FileType
+func existOrCreateConfig(configPath string) {
+	if os.Geteuid() != IdRootUser {
+		output.GetOutError("Запустите команду с помощью 'sudo'")
+	}
 
-	configPath := filepath.Join(configHome, configName+"."+configType)
-
-	viper.AddConfigPath(configHome)
-	viper.SetConfigName(configName)
-	viper.SetConfigType(configType)
+	file.CreateFile(configPath)
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		if os.Geteuid() != IdRootUser {
-			output.GetOutError("Запустите команду с помощью 'sudo'")
-		}
-
-		file.CreateFile(configPath)
-
-		err = viper.ReadInConfig()
-		if err != nil {
-			output.GetOutError("Ошибка создания файла")
-		}
+		output.GetOutError("Ошибка создания файла")
 	}
+}
+
+func Generate() {
+	err := viper.ReadInConfig()
+	if err != nil {
+		configHome := FullPathConfig
+		configName := NameFileConfig
+		configType := FileTypeConfig
+
+		configPath := filepath.Join(configHome, configName+"."+configType)
+
+		viper.AddConfigPath(configHome)
+		viper.SetConfigName(configName)
+		viper.SetConfigType(configType)
+
+		existOrCreateConfig(configPath)
+	}
+}
+
+func SetConfigVariable() {
+	viper.Set("NameFileConnects", NameFileConnects)
+	viper.Set("NameFileCryptKey", NameFileCryptKey)
 }
