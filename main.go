@@ -2,11 +2,11 @@ package main
 
 import (
 	"ssh+/cmd"
-	"ssh+/init"
+	"ssh+/inits"
 )
 
 func init() {
-	init.SetDependencies()
+	inits.SetDependencies()
 }
 
 func main() {
