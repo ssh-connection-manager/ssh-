@@ -9,6 +9,7 @@ func init() {
 	inits.LoadEnv()
 	inits.GenerateCryptKey()
 	inits.CreateFileConnects()
+	inits.GenerateConfigFile()
 }
 
 func main() {
