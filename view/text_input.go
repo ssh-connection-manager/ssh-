@@ -1,7 +1,7 @@
 package view
 
 import (
-	"os"
+	"github.com/spf13/viper"
 	"slices"
 
 	"ssh+/app/output"
@@ -16,7 +16,7 @@ type TextInput struct {
 }
 
 func (t TextInput) currentPlaceholder(name string) string {
-	return os.Getenv("SPACE") + name + t.Placeholder
+	return viper.GetString("Space") + name + t.Placeholder
 }
 
 func (t TextInput) DrawInput() {

@@ -1,8 +1,7 @@
 package inits
 
 import (
-	"os"
-
+	"github.com/spf13/viper"
 	"ssh+/app/crypt"
 	"ssh+/app/file"
 	"ssh+/app/json"
@@ -28,7 +27,7 @@ func generateConfigFile() {
 }
 
 func createFileConnects() {
-	file.GenerateFile(os.Getenv("FILE_NAME_CONNECTS"))
+	file.GenerateFile(viper.GetString("NameFileConnects"))
 	json.CreateBaseJsonDataToFile()
 }
 

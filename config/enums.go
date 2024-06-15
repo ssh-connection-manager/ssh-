@@ -12,7 +12,8 @@ const (
 )
 
 const (
-	SPACE = " "
+	Space     = " "
+	Separator = "/"
 )
 
 const (

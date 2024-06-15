@@ -1,13 +1,14 @@
 package file
 
 import (
+	"github.com/spf13/viper"
 	"os"
 
 	"ssh+/app/output"
 )
 
 func getPathToFile() string {
-	return os.Getenv("PATH_FILE") + os.Getenv("SEPARATOR")
+	return viper.GetString("FullPathConfig") + viper.GetString("Separator")
 }
 
 func GetFullPath(fileName string) (string, error) {

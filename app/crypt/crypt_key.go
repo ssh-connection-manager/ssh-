@@ -2,14 +2,13 @@ package crypt
 
 import (
 	"crypto/rand"
-	"os"
-
+	"github.com/spf13/viper"
 	"ssh+/app/file"
 	"ssh+/app/output"
 )
 
 func getPathToKey() string {
-	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CRYPT_KEY"))
+	filePath, err := file.GetFullPath(viper.GetString("NameFileCryptKey"))
 	if err != nil {
 		output.GetOutError("Ошибка получения файла rsa ключа")
 	}
@@ -22,7 +21,7 @@ func GetKey() []byte {
 }
 
 func GenerateKey() {
-	file.GenerateFile(os.Getenv("FILE_NAME_CRYPT_KEY"))
+	file.GenerateFile(viper.GetString("NameFileCryptKey"))
 
 	if len(GetKey()) == 0 {
 		key := make([]byte, 32)
