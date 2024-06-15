@@ -26,6 +26,9 @@ func existOrCreateConfig(configPath string) {
 func setConfigVariable() {
 	viper.Set("NameFileConnects", NameFileConnects)
 	viper.Set("NameFileCryptKey", NameFileCryptKey)
+	viper.Set("Separator", Separator)
+	viper.Set("Space", Space)
+
 	err := viper.WriteConfig()
 	if err != nil {
 		output.GetOutError("Ошибка записи в конфигурационный файл")
