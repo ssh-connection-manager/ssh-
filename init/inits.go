@@ -1,4 +1,4 @@
-package inits
+package init
 
 import (
 	"os"
@@ -11,22 +11,29 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func LoadEnv() {
+func loadEnv() {
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
 	}
 }
 
-func GenerateCryptKey() {
+func generateCryptKey() {
 	crypt.GenerateKey()
 }
 
-func GenerateConfigFile() {
+func generateConfigFile() {
 	config.Generate()
 }
 
-func CreateFileConnects() {
+func createFileConnects() {
 	file.GenerateFile(os.Getenv("FILE_NAME_CONNECTS"))
 	json.CreateBaseJsonDataToFile()
+}
+
+func SetDependencies() {
+	loadEnv()
+	generateCryptKey()
+	generateConfigFile()
+	createFileConnects()
 }

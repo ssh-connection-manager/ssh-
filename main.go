@@ -2,14 +2,11 @@ package main
 
 import (
 	"ssh+/cmd"
-	"ssh+/inits"
+	"ssh+/init"
 )
 
 func init() {
-	inits.LoadEnv()
-	inits.GenerateCryptKey()
-	inits.CreateFileConnects()
-	inits.GenerateConfigFile()
+	init.SetDependencies()
 }
 
 func main() {
