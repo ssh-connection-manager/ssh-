@@ -1,4 +1,4 @@
-package init
+package inits
 
 import (
 	"os"
@@ -24,6 +24,8 @@ func generateCryptKey() {
 
 func generateConfigFile() {
 	config.Generate()
+	config.SetConfigVariable()
+
 }
 
 func createFileConnects() {
@@ -32,8 +34,8 @@ func createFileConnects() {
 }
 
 func SetDependencies() {
+	generateConfigFile()
 	loadEnv()
 	generateCryptKey()
-	generateConfigFile()
 	createFileConnects()
 }
