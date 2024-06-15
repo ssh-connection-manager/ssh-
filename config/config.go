@@ -23,6 +23,15 @@ func existOrCreateConfig(configPath string) {
 	}
 }
 
+func setConfigVariable() {
+	viper.Set("NameFileConnects", NameFileConnects)
+	viper.Set("NameFileCryptKey", NameFileCryptKey)
+	err := viper.WriteConfig()
+	if err != nil {
+		output.GetOutError("Ошибка записи в конфигурационный файл")
+	}
+}
+
 func Generate() {
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -37,10 +46,6 @@ func Generate() {
 		viper.SetConfigType(configType)
 
 		existOrCreateConfig(configPath)
+		setConfigVariable()
 	}
-}
-
-func SetConfigVariable() {
-	viper.Set("NameFileConnects", NameFileConnects)
-	viper.Set("NameFileCryptKey", NameFileCryptKey)
 }
