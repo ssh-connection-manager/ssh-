@@ -24,7 +24,6 @@ func generateCryptKey() {
 
 func generateConfigFile() {
 	config.Generate()
-	config.SetConfigVariable()
 
 }
 
