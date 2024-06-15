@@ -2,9 +2,11 @@ package inits
 
 import (
 	"os"
+
 	"ssh+/app/crypt"
 	"ssh+/app/file"
 	"ssh+/app/json"
+	"ssh+/config"
 
 	"github.com/joho/godotenv"
 )
@@ -18,6 +20,10 @@ func LoadEnv() {
 
 func GenerateCryptKey() {
 	crypt.GenerateKey()
+}
+
+func GenerateConfigFile() {
+	config.Generate()
 }
 
 func CreateFileConnects() {
