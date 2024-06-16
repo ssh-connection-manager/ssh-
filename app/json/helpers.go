@@ -7,10 +7,7 @@ import (
 )
 
 func GetPathToConnectFile() string {
-	fullPath, err := file.GetFullPath(viper.GetString("NameFileConnects"))
-	if err != nil {
-		panic(err)
-	}
+	fullPath := file.GetFullPath(viper.GetString("NameFileConnects"))
 
 	return fullPath
 }
