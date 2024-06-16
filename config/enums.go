@@ -2,8 +2,6 @@ package config
 
 const (
 	FullPathConfig = "/etc/ssh+/"
-	NameFileConfig = "config"
-	FileTypeConfig = "yml"
 )
 
 const (
@@ -14,8 +12,14 @@ const (
 const (
 	Space     = " "
 	Separator = "/"
+	Dot       = "."
 )
 
 const (
 	IdRootUser = 0
+
+	NameFileConfig = "config"
+	TypeFileConfig = "yml"
+
+	FullNameFileConfig = NameFileConfig + Dot + TypeFileConfig
 )
