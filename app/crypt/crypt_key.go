@@ -2,35 +2,42 @@ package crypt
 
 import (
 	"crypto/rand"
-	"github.com/spf13/viper"
 	"ssh+/app/file"
 	"ssh+/app/output"
+
+	"github.com/spf13/viper"
 )
 
 func getPathToKey() string {
-	filePath, err := file.GetFullPath(viper.GetString("NameFileCryptKey"))
-	if err != nil {
-		output.GetOutError("Ошибка получения файла rsa ключа")
-	}
+	filePath := file.GetFullPath(viper.GetString("NameFileCryptKey"))
 
 	return filePath
 }
 
 func GetKey() []byte {
-	return []byte(file.ReadFile(getPathToKey()))
+	data, err := file.ReadFile(getPathToKey())
+	if err != nil {
+		output.GetOutError("Ошибка открытия файла")
+	}
+
+	return []byte(data)
 }
 
 func GenerateKey() {
-	file.GenerateFile(viper.GetString("NameFileCryptKey"))
+	fileName := viper.GetString("NameFileCryptKey")
 
-	if len(GetKey()) == 0 {
-		key := make([]byte, 32)
+	if !file.IsExistFile(fileName) {
+		file.GenerateFile(fileName)
 
-		_, err := rand.Read(key)
-		if err != nil {
-			output.GetOutError("Ошибка генирации ключа")
+		if len(GetKey()) == 0 {
+			key := make([]byte, 32)
+
+			_, err := rand.Read(key)
+			if err != nil {
+				output.GetOutError("Ошибка генирации ключа")
+			}
+
+			file.WriteFile(getPathToKey(), key)
 		}
-
-		file.WriteFile(getPathToKey(), key)
 	}
 }

@@ -12,12 +12,14 @@ import (
 )
 
 func Ssh(c *json.Connections, alias string) {
-	filePath, err := file.GetFullPath(viper.GetString("NameFileConnects"))
+	filePath := file.GetFullPath(viper.GetString("NameFileConnects"))
+
+	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка получения путя к файлу")
+		output.GetOutError("Ошибка открытия фала")
 	}
 
-	c.SerializationJson(file.ReadFile(filePath))
+	c.SerializationJson(data)
 	c.SetDecryptData()
 
 	for _, v := range c.Connects {
