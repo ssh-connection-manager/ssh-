@@ -1,30 +1,28 @@
 package file
 
 import (
-	"os"
+	"path/filepath"
 
-	"ssh+/app/output"
+	"github.com/spf13/viper"
 )
 
-func getPathToFile() string {
-	return os.Getenv("PATH_FILE") + os.Getenv("SEPARATOR")
+func GetFullPath(fileName string) string {
+	return filepath.Join(viper.GetString("FullPathConfig"), fileName)
 }
 
-func GetFullPath(fileName string) (string, error) {
-	homePath, err := os.UserHomeDir()
+func IsExistFile(filename string) bool {
+	filePath := GetFullPath(filename)
+
+	_, err := ReadFile(filePath)
 	if err != nil {
-		return "", err
+		return false
 	}
 
-	path := homePath + getPathToFile() + fileName
-	return path, nil
+	return true
 }
 
 func GenerateFile(filename string) {
-	filePath, err := GetFullPath(filename)
-	if err != nil {
-		output.GetOutError("Ошибка получения файла")
-	}
+	filePath := GetFullPath(filename)
 
 	CreateFile(filePath)
 }

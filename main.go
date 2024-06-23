@@ -6,9 +6,7 @@ import (
 )
 
 func init() {
-	inits.LoadEnv()
-	inits.GenerateCryptKey()
-	inits.CreateFileConnects()
+	inits.SetDependencies()
 }
 
 func main() {

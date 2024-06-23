@@ -28,19 +28,19 @@ func CreateFile(filePath string) {
 	}
 }
 
-func ReadFile(filePath string) string {
+func ReadFile(filePath string) (string, error) {
 	f, err := os.Open(filePath)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 	defer f.Close()
 
 	fContent, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
-	return string(fContent)
+	return string(fContent), nil
 }
 
 func WriteFile(path string, rowData []byte) {

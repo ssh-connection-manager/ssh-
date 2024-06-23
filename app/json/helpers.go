@@ -1,16 +1,13 @@
 package json
 
 import (
-	"os"
-
 	"ssh+/app/file"
+
+	"github.com/spf13/viper"
 )
 
 func GetPathToConnectFile() string {
-	fullPath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
-	if err != nil {
-		panic(err)
-	}
+	fullPath := file.GetFullPath(viper.GetString("NameFileConnects"))
 
 	return fullPath
 }

@@ -20,7 +20,12 @@ type Connect struct {
 func (c *Connections) GetConnectionsAlias() []string {
 	filePath := GetPathToConnectFile()
 
-	c.SerializationJson(file.ReadFile(filePath))
+	data, err := file.ReadFile(filePath)
+	if err != nil {
+		output.GetOutError("Ошибка открытия файла")
+	}
+
+	c.SerializationJson(data)
 	c.SetDecryptData()
 
 	var result []string
@@ -41,7 +46,12 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 
 	filePath := GetPathToConnectFile()
 
-	c.SerializationJson(file.ReadFile(filePath))
+	data, err := file.ReadFile(filePath)
+	if err != nil {
+		output.GetOutError("Ошибка открытия файла")
+	}
+
+	c.SerializationJson(data)
 	c.SetDecryptData()
 
 	defer c.SetCryptAllData()
@@ -62,7 +72,13 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 	}
 
 	filePath := GetPathToConnectFile()
-	c.SerializationJson(file.ReadFile(filePath))
+
+	data, err := file.ReadFile(filePath)
+	if err != nil {
+		output.GetOutError("Ошибка открытия файла")
+	}
+
+	c.SerializationJson(data)
 
 	encodedConnect := SetCryptData(connect)
 	c.Connects = append(c.Connects, encodedConnect)

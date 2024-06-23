@@ -2,6 +2,7 @@ package connect
 
 import (
 	"fmt"
+	"github.com/spf13/viper"
 	"os"
 	"os/exec"
 
@@ -11,12 +12,14 @@ import (
 )
 
 func Ssh(c *json.Connections, alias string) {
-	filePath, err := file.GetFullPath(os.Getenv("FILE_NAME_CONNECTS"))
+	filePath := file.GetFullPath(viper.GetString("NameFileConnects"))
+
+	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка получения путя к файлу")
+		output.GetOutError("Ошибка открытия фала")
 	}
 
-	c.SerializationJson(file.ReadFile(filePath))
+	c.SerializationJson(data)
 	c.SetDecryptData()
 
 	for _, v := range c.Connects {

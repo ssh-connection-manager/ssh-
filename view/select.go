@@ -1,7 +1,7 @@
 package view
 
 import (
-	"os"
+	"github.com/spf13/viper"
 	"strconv"
 	"strings"
 
@@ -22,7 +22,7 @@ type Select struct {
 func (s Select) SelectedValue(aliases []string) string {
 	sp := selection.New(s.SelectionPrompt, aliases)
 
-	sp.FilterPlaceholder = os.Getenv("SPACE") + s.FilterPlaceholder
+	sp.FilterPlaceholder = viper.GetString("Space") + s.FilterPlaceholder
 	sp.FilterPrompt = s.FilterPrompt
 	sp.Template = s.Template
 
