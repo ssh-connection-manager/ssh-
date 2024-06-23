@@ -1,8 +1,7 @@
 package config
 
 import (
-	"fmt"
-	"os"
+	"os/user"
 
 	"ssh+/app/file"
 	"ssh+/app/output"
@@ -10,17 +9,21 @@ import (
 	"github.com/spf13/viper"
 )
 
+func getHomeDir() string {
+	usr, err := user.Current()
+	if err != nil {
+		output.GetOutError("Ошибка получения данных пользователя")
+	}
+
+	return usr.HomeDir + DirectionApp
+}
+
 func existOrCreateConfig(configPath string) {
 	err := viper.ReadInConfig()
 	if err != nil {
-		if os.Geteuid() != IdRootUser {
-			output.GetOutError("Запустите команду с помощью 'sudo'")
-		}
-
 		file.CreateFile(configPath)
 
 		err = viper.ReadInConfig()
-		fmt.Println(err)
 		if err != nil {
 			output.GetOutError("Ошибка создания файла")
 		}
@@ -30,7 +33,7 @@ func existOrCreateConfig(configPath string) {
 func setConfigVariable() {
 	viper.Set("NameFileConnects", NameFileConnects)
 	viper.Set("NameFileCryptKey", NameFileCryptKey)
-	viper.Set("FullPathConfig", FullPathConfig)
+	viper.Set("FullPathConfig", getHomeDir())
 	viper.Set("Separator", Separator)
 	viper.Set("Space", Space)
 
@@ -42,13 +45,14 @@ func setConfigVariable() {
 
 func Generate() {
 	viper.New()
+
 	viper.SetConfigName(NameFileConfig)
 	viper.SetConfigType(TypeFileConfig)
-	viper.AddConfigPath(FullPathConfig)
+	viper.AddConfigPath(getHomeDir())
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		configPath := FullPathConfig + FullNameFileConfig
+		configPath := getHomeDir() + FullNameFileConfig
 		existOrCreateConfig(configPath)
 		setConfigVariable()
 	}
