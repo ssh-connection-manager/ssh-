@@ -10,11 +10,11 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   root.UseCommand,
 	Short: root.ShortDescription,
-	Long:  root.LongDescription,
 }
 
 func Execute() {
 	rootCmd.Root().CompletionOptions.DisableDefaultCmd = true
+	rootCmd.Long = root.GetLongDescription()
 
 	err := rootCmd.Execute()
 	if err != nil {
