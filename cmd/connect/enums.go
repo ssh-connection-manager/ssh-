@@ -2,15 +2,15 @@ package connect
 
 const (
 	UseCommand       = `connect`
-	ShortDescription = `Вывод подключенных ssh соединений`
-	LongDescription  = `Данная команда выводит список ваших добавленных соедениний по ssh,
-в случае его отсутвия попросит добавить подключения`
+	ShortDescription = `Output connected ssh connections`
+	LongDescription  = `This command displays a list of your added ssh connections,
+if none are available, it will ask you to add connections`
 )
 
 const (
-	FilterPlaceholder = "Введите или выбирите название подключения"
-	SelectionPrompt   = "Выбор подключения"
-	FilterPrompt      = "Поиск по алиуса:"
+	FilterPlaceholder = "Enter or select the name of the connection"
+	SelectionPrompt   = "Connection selection"
+	FilterPrompt      = "Search by alias:"
 	PageSize          = "5"
 )
 

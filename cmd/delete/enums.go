@@ -2,14 +2,14 @@ package delete
 
 const (
 	UseCommand       = `delete`
-	ShortDescription = `Удаление подключение по алиасу`
-	LongDescription  = `Данная команда позволяет удалить подключение по алиасу`
+	ShortDescription = `Removing an alias connection`
+	LongDescription  = `This command allows you to remove an alias connection`
 )
 
 const (
-	FilterPlaceholder = "Введите или выбирите название для удаление подключения"
-	SelectionPrompt   = "Выбор удаление подключения"
-	FilterPrompt      = "Поиск по алиуса:"
+	FilterPlaceholder = "Enter or select a name to delete the connection"
+	SelectionPrompt   = "Selecting whether to remove the connection"
+	FilterPrompt      = "Search by alias:"
 	PageSize          = "5"
 )
 
