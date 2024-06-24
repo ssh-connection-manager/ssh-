@@ -37,7 +37,7 @@ func (t TextInput) DrawInput() {
 		*arg[1], err = input.RunPrompt()
 
 		if err != nil {
-			output.GetOutError("Ошибка ввода")
+			output.GetOutError("Input error")
 		}
 	}
 }

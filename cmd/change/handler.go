@@ -26,6 +26,6 @@ func ExistByIndex(alias string) {
 	_, err := connects.ExistConnectJsonByIndex(alias)
 
 	if err != nil {
-		output.GetOutError("Не найдено подключение")
+		output.GetOutError("No connection found")
 	}
 }

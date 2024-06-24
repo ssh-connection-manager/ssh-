@@ -2,7 +2,7 @@ package list
 
 const (
 	UseCommand       = `list`
-	ShortDescription = `Вывод добавленных ваших подключений для ssh`
-	LongDescription  = `Данная команда выводит список ваших добавленных соедениний по ssh, 
-в случае его отсутвия попросит добавить подключения`
+	ShortDescription = `Output your added connections for ssh`
+	LongDescription  = `This command displays a list of your added ssh connections, 
+if none are available, it will ask you to add connections`
 )

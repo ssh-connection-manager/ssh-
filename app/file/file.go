@@ -46,6 +46,6 @@ func ReadFile(filePath string) (string, error) {
 func WriteFile(path string, rowData []byte) {
 	err := ioutil.WriteFile(path, rowData, 0)
 	if err != nil {
-		output.GetOutError("ошибка при записи в файл")
+		output.GetOutError("Error when writing to a file")
 	}
 }

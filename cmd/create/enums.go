@@ -2,18 +2,18 @@ package create
 
 const (
 	UseCommand       = `create`
-	ShortDescription = `Создает подключение`
-	LongDescription  = `Данная команда создает подключения, 
-которые вы сможете переиспользовать при подключении по ssh`
+	ShortDescription = `Creates a connection`
+	LongDescription  = `This command creates connections, 
+that you can reuse when connecting via ssh`
 )
 
 const (
-	Placeholder = " не должен быть пустым"
+	Placeholder = " must not be empty"
 )
 
 var (
-	NameAlias    = "Алиас"
-	NameAddress  = "Адресс"
-	NameLogin    = "Логин"
-	NamePassword = "Пароль"
+	NameAlias    = "Alias"
+	NameAddress  = "Address"
+	NameLogin    = "Login"
+	NamePassword = "Password"
 )

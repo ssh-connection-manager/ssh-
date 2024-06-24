@@ -22,7 +22,7 @@ func (c *Connections) GetConnectionsAlias() []string {
 
 	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка открытия файла")
+		output.GetOutError("File opening error")
 	}
 
 	c.SerializationJson(data)
@@ -35,7 +35,7 @@ func (c *Connections) GetConnectionsAlias() []string {
 	}
 
 	if len(result) == 0 {
-		output.GetOutError("Подключений не найдено")
+		output.GetOutError("No connections found")
 	}
 
 	return result
@@ -48,7 +48,7 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 
 	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка открытия файла")
+		output.GetOutError("File opening error")
 	}
 
 	c.SerializationJson(data)
@@ -62,20 +62,20 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 		}
 	}
 
-	return noFound, errors.New("not found")
+	return noFound, errors.New("Not found")
 }
 
 func (c *Connections) WriteConnectToJson(connect Connect) {
 	_, err := c.ExistConnectJsonByIndex(connect.Alias)
 	if err == nil {
-		output.GetOutError("Алиас должен быть уникальным")
+		output.GetOutError("The alias must be unique")
 	}
 
 	filePath := GetPathToConnectFile()
 
 	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка открытия файла")
+		output.GetOutError("File opening error")
 	}
 
 	c.SerializationJson(data)
@@ -95,18 +95,18 @@ func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
 		return nil
 	}
 
-	return errors.New("Ошибка обновления подключения")
+	return errors.New("Connection update error")
 }
 
 func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
 	index, err := c.ExistConnectJsonByIndex(alias)
 	if err != nil {
-		output.GetOutError("Не найдено подключение")
+		output.GetOutError("No connection found")
 	}
 
 	err = c.updateJsonDataByIndex(index, SetCryptData(connect))
 	if err != nil {
-		output.GetOutError("Ошибка обновления подключения")
+		output.GetOutError("Connection update error")
 	}
 
 	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
@@ -122,7 +122,7 @@ func (c *Connections) deleteJsonDataByIndex(index int) {
 func (c *Connections) DeleteConnectToJson(alias string) {
 	index, err := c.ExistConnectJsonByIndex(alias)
 	if err != nil {
-		output.GetOutError("Не найдено подключение")
+		output.GetOutError("No connection found")
 	}
 
 	c.deleteJsonDataByIndex(index)

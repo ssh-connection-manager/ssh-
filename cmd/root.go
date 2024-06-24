@@ -1,8 +1,7 @@
 package cmd
 
 import (
-	"os"
-
+	"ssh+/app/output"
 	"ssh+/cmd/root"
 
 	"github.com/spf13/cobra"
@@ -11,16 +10,14 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   root.UseCommand,
 	Short: root.ShortDescription,
-	Long:  root.LongDescription,
 }
 
 func Execute() {
+	rootCmd.Root().CompletionOptions.DisableDefaultCmd = true
+	rootCmd.Long = root.GetLongDescription()
+
 	err := rootCmd.Execute()
 	if err != nil {
-		os.Exit(1)
+		output.GetOutError("ssh+ is die")
 	}
-}
-
-func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

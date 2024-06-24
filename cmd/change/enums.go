@@ -2,14 +2,14 @@ package change
 
 const (
 	UseCommand       = `change`
-	ShortDescription = `Изменения подключения`
-	LongDescription  = `Данная команда изменяет выбранное подключения по ssh`
+	ShortDescription = `Connection changes`
+	LongDescription  = `This command modifies the selected ssh connection`
 )
 
 const (
-	FilterPlaceholder = "Введите или выбирите название для изменения подключения"
-	SelectionPrompt   = "Выбор изменения подключения"
-	FilterPrompt      = "Поиск по алиуса:"
+	FilterPlaceholder = "Enter or select a name to change the connection"
+	SelectionPrompt   = "Selecting a connection change"
+	FilterPrompt      = "Search by alias:"
 	PageSize          = "5"
 )
 

@@ -1,15 +1,16 @@
 package config
 
 const (
-	DirectionApp = "/ssh+/"
-)
-
-const (
 	NameFileConfig = "config"
 	TypeFileConfig = "yml"
 	Separator      = "/"
+	NameApp        = "ssh+"
 	Space          = " "
 	Dot            = "."
+)
+
+const (
+	DirectionApp = Separator + NameApp + Separator
 )
 
 const (

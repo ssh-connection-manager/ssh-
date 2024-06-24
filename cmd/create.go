@@ -34,7 +34,7 @@ var createCmd = &cobra.Command{
 
 		create.Connect(alias, address, login, password)
 
-		output.GetOutSuccess("create called")
+		output.GetOutSuccess("Create called")
 	},
 }
 

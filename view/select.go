@@ -29,7 +29,7 @@ func (s Select) SelectedValue(aliases []string) string {
 	pageSize, err := strconv.Atoi(s.PageSize)
 
 	if err != nil {
-		output.GetOutError("Неправильная ковертация")
+		output.GetOutError("Misquotation")
 	}
 
 	sp.PageSize = pageSize
@@ -47,7 +47,7 @@ func (s Select) SelectedValue(aliases []string) string {
 	selectedValue, err := sp.RunPrompt()
 
 	if err != nil {
-		output.GetOutError("Ошибка ввода")
+		output.GetOutError("Input error")
 	}
 
 	return selectedValue
