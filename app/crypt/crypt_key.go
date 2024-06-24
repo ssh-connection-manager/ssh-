@@ -17,7 +17,7 @@ func getPathToKey() string {
 func GetKey() []byte {
 	data, err := file.ReadFile(getPathToKey())
 	if err != nil {
-		output.GetOutError("Ошибка открытия файла")
+		output.GetOutError("File opening error")
 	}
 
 	return []byte(data)
@@ -34,7 +34,7 @@ func GenerateKey() {
 
 			_, err := rand.Read(key)
 			if err != nil {
-				output.GetOutError("Ошибка генирации ключа")
+				output.GetOutError("Key generation error")
 			}
 
 			file.WriteFile(getPathToKey(), key)

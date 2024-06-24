@@ -11,7 +11,7 @@ func GetRelease() string {
 
 	test, err := cmd.Output()
 	if err != nil {
-		output.GetOutError("Ошибка получения версии репозитория")
+		output.GetOutError("Error getting repository version")
 	}
 
 	return strings.TrimSpace(string(test))

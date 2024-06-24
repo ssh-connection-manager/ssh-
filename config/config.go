@@ -12,7 +12,7 @@ import (
 func getHomeDir() string {
 	usr, err := user.Current()
 	if err != nil {
-		output.GetOutError("Ошибка получения данных пользователя")
+		output.GetOutError("Error retrieving user data")
 	}
 
 	return usr.HomeDir + DirectionApp
@@ -25,7 +25,7 @@ func existOrCreateConfig(configPath string) {
 
 		err = viper.ReadInConfig()
 		if err != nil {
-			output.GetOutError("Ошибка создания файла")
+			output.GetOutError("File creation error")
 		}
 	}
 }
@@ -39,7 +39,7 @@ func setConfigVariable() {
 
 	err := viper.WriteConfig()
 	if err != nil {
-		output.GetOutError("Ошибка записи в конфигурационный файл")
+		output.GetOutError("Error writing to configuration file")
 	}
 }
 

@@ -16,7 +16,7 @@ func Ssh(c *json.Connections, alias string) {
 
 	data, err := file.ReadFile(filePath)
 	if err != nil {
-		output.GetOutError("Ошибка открытия фала")
+		output.GetOutError("Error opening a file")
 	}
 
 	c.SerializationJson(data)
@@ -29,7 +29,7 @@ func Ssh(c *json.Connections, alias string) {
 		}
 	}
 
-	output.GetOutError("Не найдено подключение")
+	output.GetOutError("No connection found")
 }
 
 func sshConnect(address, login, password string) {
@@ -41,6 +41,6 @@ func sshConnect(address, login, password string) {
 	sshCmd.Stdin = os.Stdin
 
 	if err := sshCmd.Run(); err != nil {
-		fmt.Println("Ошибка при выполнении команды:", err)
+		fmt.Println("Error while executing the command:", err)
 	}
 }
