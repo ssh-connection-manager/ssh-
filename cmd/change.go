@@ -50,7 +50,7 @@ var changeCmd = &cobra.Command{
 
 		change.Connect(choice, alias, address, login, password)
 
-		output.GetOutSuccess("update called")
+		output.GetOutSuccess("Update called")
 	},
 }
 

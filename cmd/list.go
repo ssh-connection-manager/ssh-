@@ -16,7 +16,7 @@ var listCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		list := list.Show()
 
-		fmt.Println("Список ваших подключений:")
+		fmt.Println("A list of your connections:")
 
 		for _, v := range list {
 			output.GetOutSuccess(v)
