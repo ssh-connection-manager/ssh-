@@ -22,7 +22,7 @@ func getOut(color *color.Color, message string) {
 }
 
 func GetOutSuccess(successName string) {
-	green := color.New(color.BgGreen)
+	green := color.New(color.FgGreen)
 
 	getOut(green, successName)
 }
