@@ -33,7 +33,7 @@ const (
 	{{- end -}}
 	
 	{{- if eq $.SelectedIndex $i }}
-		{{- print (Foreground "201" (Bold "▸ ")) (Selected $choice) "\n" }}
+		{{- print (Foreground "206" (Bold "▸ ")) (Selected $choice) "\n" }}
 	{{- else }}
 		{{- print " " (Unselected $choice) "\n" }}
 	{{- end }}
@@ -45,8 +45,8 @@ const (
 )
 
 var (
-	NameAlias    = "Алиас"
-	NameAddress  = "Адресс"
-	NameLogin    = "Логин"
-	NamePassword = "Пароль"
+	NameAlias    = "Alias"
+	NameAddress  = "Address"
+	NameLogin    = "Login"
+	NamePassword = "Password"
 )
