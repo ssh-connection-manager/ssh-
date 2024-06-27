@@ -26,6 +26,8 @@ func (s Select) SelectedValue(aliases []string) string {
 	sp.FilterPrompt = s.FilterPrompt
 	sp.Template = s.Template
 
+	sp.ResultTemplate = ResultTemplateSelect
+
 	pageSize, err := strconv.Atoi(s.PageSize)
 
 	if err != nil {
@@ -42,6 +44,10 @@ func (s Select) SelectedValue(aliases []string) string {
 
 	sp.SelectedChoiceStyle = func(c *selection.Choice[string]) string {
 		return color.Bold().Styled(c.Value)
+	}
+
+	sp.ExtendedTemplateFuncs = map[string]interface{}{
+		resultChoiceName: func(c *selection.Choice[string]) string { return c.Value },
 	}
 
 	selectedValue, err := sp.RunPrompt()

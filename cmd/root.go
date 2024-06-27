@@ -8,8 +8,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   root.UseCommand,
-	Short: root.ShortDescription,
+	Use: root.UseCommand,
 }
 
 func Execute() {

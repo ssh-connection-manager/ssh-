@@ -26,6 +26,8 @@ func (t TextInput) DrawInput() {
 	for _, arg := range t.Arguments {
 		input = textinput.New(*arg[0])
 
+		input.ResultTemplate = ResultTemplateTextInput
+
 		hiddenInput := slices.Contains(t.HiddenArgs, arg[1])
 
 		if hiddenInput {
