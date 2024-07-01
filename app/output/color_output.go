@@ -12,23 +12,25 @@ func exitApp() {
 	os.Exit(1)
 }
 
-func getOut(color *color.Color, message string) {
+func getOut(color *color.Color, message string, isExitApp bool) {
 	_, err := color.Println(message)
 	if err != nil {
 		exitApp()
 	}
 
-	os.Exit(1)
+	if isExitApp {
+		os.Exit(1)
+	}
 }
 
 func GetOutSuccess(successName string) {
 	green := color.New(color.FgGreen)
 
-	getOut(green, successName)
+	getOut(green, successName, !ExitApp)
 }
 
 func GetOutError(errName string) {
 	red := color.New(color.FgRed)
 
-	getOut(red, errName)
+	getOut(red, errName, ExitApp)
 }
