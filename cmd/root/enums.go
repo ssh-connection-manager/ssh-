@@ -1,9 +1,8 @@
 package root
 
 const (
-	UseCommand       = `ssh+`
-	ShortDescription = `A brief description of your application`
-	LongDescription  = `
+	UseCommand      = `ssh+`
+	LongDescription = `
 ░░██████╗░██████╗██╗░░██╗░░░░░░░░
 ░██╔════╝██╔════╝██║░░██║░░██╗░░░
 ░╚█████╗░╚█████╗░███████║██████╗░
@@ -21,5 +20,4 @@ Once created, select your alias connection:
 -- ssh+ connect
 
 `
-	DescriptionVersionApp = "version: "
 )
