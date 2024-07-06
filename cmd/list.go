@@ -22,14 +22,14 @@ var listCmd = &cobra.Command{
 
 		re := lipgloss.NewRenderer(os.Stdout)
 
-		purple := lipgloss.Color("99")
+		purple := lipgloss.Color("206")
 		gray := lipgloss.Color("245")
 		lightGray := lipgloss.Color("241")
 
 		// HeaderStyle is the lipgloss style used for the table headers.
 		HeaderStyle := re.NewStyle().Foreground(purple).Bold(true).Align(lipgloss.Center)
 		// CellStyle is the base lipgloss style used for the table rows.
-		CellStyle := re.NewStyle().Padding(0, 1).Width(14)
+		CellStyle := re.NewStyle().Padding(0, 1).Width(1)
 		// OddRowStyle is the lipgloss style used for odd-numbered table rows.
 		OddRowStyle := CellStyle.Foreground(gray)
 		// EvenRowStyle is the lipgloss style used for even-numbered table rows.
@@ -55,7 +55,7 @@ var listCmd = &cobra.Command{
 				return style
 			}).
 			Headers("Alias", "Updated at", "Created at").
-			Rows(list...).Width(50)
+			Rows(list...).Width(70)
 
 		fmt.Println(t)
 	},
