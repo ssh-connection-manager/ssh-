@@ -37,15 +37,6 @@ var listCmd = &cobra.Command{
 		// BorderStyle is the lipgloss style used for the table border.
 		BorderStyle := lipgloss.NewStyle().Foreground(purple)
 
-		var list2 [][]string
-
-		for _, v := range list {
-			newElement := []string{v}
-			list2 = append(list2, newElement)
-		}
-
-		fmt.Println(list)
-
 		t := table.New().
 			Border(lipgloss.NormalBorder()).
 			BorderStyle(BorderStyle).
@@ -64,7 +55,7 @@ var listCmd = &cobra.Command{
 				return style
 			}).
 			Headers("Alias", "Updated at", "Created at").
-			Rows(list2...).Width(50)
+			Rows(list...).Width(50)
 
 		fmt.Println(t)
 	},
