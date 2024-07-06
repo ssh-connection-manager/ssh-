@@ -3,9 +3,10 @@ package cmd
 import (
 	"fmt"
 
-	"ssh+/app/output"
 	"ssh+/cmd/list"
+	"ssh+/view"
 
+	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 )
 
@@ -18,9 +19,24 @@ var listCmd = &cobra.Command{
 
 		fmt.Println("A list of your connections:")
 
-		for _, v := range list {
-			output.GetOutSuccess(v)
+		lightGray := lipgloss.Color("241")
+		purple := lipgloss.Color("206")
+		gray := lipgloss.Color("245")
+
+		headers := []string{
+			"Alias",
+			"Updated at",
+			"Created at",
 		}
+
+		table := view.Table{
+			HeaderStyle:  purple,
+			OddCellStyle: gray,
+			EvenRowStyle: lightGray,
+			BorderStyle:  purple,
+		}
+
+		fmt.Println(table.ViewTable(list, headers))
 	},
 }
 

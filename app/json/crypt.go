@@ -10,6 +10,9 @@ func SetCryptData(c Connect) Connect {
 	c.Login = crypt.Encrypt(c.Login)
 	c.Password = crypt.Encrypt(c.Password)
 
+	c.CreatedAt = crypt.Encrypt(c.CreatedAt)
+	c.UpdatedAt = crypt.Encrypt(c.UpdatedAt)
+
 	return c
 }
 
@@ -18,6 +21,9 @@ func decryptData(c Connect) Connect {
 	c.Address = crypt.Decrypt(c.Address)
 	c.Login = crypt.Decrypt(c.Login)
 	c.Password = crypt.Decrypt(c.Password)
+
+	c.CreatedAt = crypt.Decrypt(c.CreatedAt)
+	c.UpdatedAt = crypt.Decrypt(c.UpdatedAt)
 
 	return c
 }
