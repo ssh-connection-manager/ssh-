@@ -15,9 +15,12 @@ type Connect struct {
 	Login    string `json:"login"`
 	Address  string `json:"address"`
 	Password string `json:"password"`
+
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
-func (c *Connections) GetConnectionsAlias() []string {
+func (c *Connections) getConnectData() {
 	filePath := GetPathToConnectFile()
 
 	data, err := file.ReadFile(filePath)
@@ -27,8 +30,29 @@ func (c *Connections) GetConnectionsAlias() []string {
 
 	c.SerializationJson(data)
 	c.SetDecryptData()
+}
 
+func (c *Connections) GetDataForListConnect() [][]string {
+	var result [][]string
+
+	c.getConnectData()
+
+	for _, v := range c.Connects {
+		newElement := []string{v.Alias, v.CreatedAt, v.UpdatedAt}
+		result = append(result, newElement)
+	}
+
+	if len(result) == 0 {
+		output.GetOutError("No connections found")
+	}
+
+	return result
+}
+
+func (c *Connections) GetConnectionsAlias() []string {
 	var result []string
+
+	c.getConnectData()
 
 	for _, conn := range c.Connects {
 		result = append(result, conn.Alias)
@@ -44,15 +68,7 @@ func (c *Connections) GetConnectionsAlias() []string {
 func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 	var noFound = -1
 
-	filePath := GetPathToConnectFile()
-
-	data, err := file.ReadFile(filePath)
-	if err != nil {
-		output.GetOutError("File opening error")
-	}
-
-	c.SerializationJson(data)
-	c.SetDecryptData()
+	c.getConnectData()
 
 	defer c.SetCryptAllData()
 
@@ -92,6 +108,8 @@ func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
 		c.Connects[index].Address = connect.Address
 		c.Connects[index].Login = connect.Login
 		c.Connects[index].Password = connect.Password
+		c.Connects[index].UpdatedAt = connect.UpdatedAt
+
 		return nil
 	}
 
