@@ -1,0 +1,33 @@
+name: deb-build
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+env:
+  APP_NAME: 'ssh+'
+  MAINTAINER: 'deniskorbakov'
+  DESC: 'ssh+ - cli app connect manager for ssh'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build go
+        run: | 
+          go build -v ./
+      - name: create deb package
+        run: |
+          mkdir -p .debpkg/usr/bin
+          cp -p ./${{ env.APP_NAME }} .debpkg/usr/bin/
+      - uses: jiro4989/build-deb-action@v3
+        with:
+          package: ${{ env.APP_NAME }}
+          package_root: .debpkg
+          maintainer: ${{ env.MAINTAINER }}
+          version: ${{ github.ref }}
+          arch: 'amd64'
+          depends: 'sshpass, ssh'
+          desc: ${{ env.DESC }}
