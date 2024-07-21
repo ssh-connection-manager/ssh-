@@ -31,3 +31,4 @@ jobs:
           arch: 'amd64'
           depends: 'sshpass, ssh'
           desc: ${{ env.DESC }}
+          homepage: 'https://github.com/ssh-connection-manager/ssh-'
