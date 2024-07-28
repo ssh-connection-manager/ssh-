@@ -37,7 +37,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          path: ${{steps.create_deb_package.outputs.file_name}}
+          path: ${{steps.build_deb_package.outputs.file_name}}
           name: deb-package
 
   release:
