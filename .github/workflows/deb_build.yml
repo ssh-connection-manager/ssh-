@@ -3,7 +3,8 @@ name: deb-build
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v..'
+
 env:
   APP_NAME: 'ssh+'
   MAINTAINER: 'deniskorbakov'
@@ -14,15 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: build go
-        run: | 
-          go build -v ./
-      - name: create deb package
+      - name: Build Go
+        run: go build -v ./
+      - name: Create deb package
         run: |
           mkdir -p .debpkg/usr/bin
           cp -p ./${{ env.APP_NAME }} .debpkg/usr/bin/
-      - uses: jiro4989/build-deb-action@v3
+      - name: Build deb package
+        uses: jiro4989/build-deb-action@v3
         with:
           package: ${{ env.APP_NAME }}
           package_root: .debpkg
@@ -32,3 +32,28 @@ jobs:
           depends: 'sshpass, ssh'
           desc: ${{ env.DESC }}
           homepage: 'https://github.com/ssh-connection-manager/ssh-'
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: .debpkg/${{ env.APP_NAME }}_${{ github.ref }}.deb
+          name: deb-package
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: .debpkg/${{ env.APP_NAME }}_${{ github.ref }}.deb
+          asset_name: ${{ env.APP_NAME }}_${{ github.ref }}.deb
+          asset_content_type: application/octet-stream
