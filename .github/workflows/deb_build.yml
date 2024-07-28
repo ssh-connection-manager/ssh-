@@ -25,6 +25,7 @@ jobs:
           cp -p ./${{ env.APP_NAME }} .debpkg/usr/bin/
       - name: Build deb package
         uses: jiro4989/build-deb-action@v3
+        id: build_deb_package
         with:
           package: ${{ env.APP_NAME }}
           package_root: .debpkg
