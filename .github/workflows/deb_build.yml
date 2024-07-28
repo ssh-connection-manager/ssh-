@@ -10,6 +10,8 @@ env:
   MAINTAINER: 'deniskorbakov'
   DESC: 'ssh+ - cli app connect manager for ssh'
 
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,7 +37,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          path: .debpkg/${{ env.APP_NAME }}_${{ github.ref }}.deb
+          path: ${{steps.create_deb_package.outputs.file_name}}
           name: deb-package
 
   release:
