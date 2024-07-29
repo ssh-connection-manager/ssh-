@@ -67,8 +67,10 @@ jobs:
           release_name: ${{ github.ref_name }}
           draft: false
           prerelease: false
+        continue-on-error: true
 
       - name: Upload Release Asset
+        if: steps.create_release.outputs.upload_url
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
