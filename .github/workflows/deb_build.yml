@@ -53,7 +53,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Test upload-to-github-release works with `actions/create-release`.
-          draft: false
+          draft: true
           prerelease: false
       - uses: xresloader/upload-to-github-release@main
         env:
