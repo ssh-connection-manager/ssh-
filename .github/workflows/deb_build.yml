@@ -1,5 +1,4 @@
 name: deb-build
-
 on:
   push:
     tags:
@@ -59,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          file: ${{steps.build_deb_package.outputs.file_name}}
+          file: "*.deb; ./*.deb" # This is where you use the output from the build step
           release_id: ${{ steps.create_release.outputs.id }}
           update_release_body: ${{ github.ref }}
           update_release_body_append: "true"
