@@ -1,4 +1,4 @@
-name: DEB Build
+name: deb-build
 
 on:
   push:
@@ -11,50 +11,64 @@ env:
   DESC: 'ssh+ - cli app connect manager for ssh'
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Build Go
         run: go build -v ./
-
-      - name: Create DEB package
+      - name: Create deb package
         run: |
           mkdir -p .debpkg/usr/bin
           cp -p ./${{ env.APP_NAME }} .debpkg/usr/bin/
-
-      - name: Build DEB package
+      - name: Build deb package
         uses: jiro4989/build-deb-action@v3
         id: build_deb_package
         with:
           package: ${{ env.APP_NAME }}
           package_root: .debpkg
           maintainer: ${{ env.MAINTAINER }}
-          version: ${{ github.ref_name }}
+          version: ${{ github.ref }}
           arch: 'amd64'
           depends: 'sshpass, ssh'
           desc: ${{ env.DESC }}
           homepage: 'https://github.com/ssh-connection-manager/ssh-'
-
-      - name: Upload Artifact
+      - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           path: ${{steps.build_deb_package.outputs.file_name}}
           name: deb-package
 
-  release:
-    name: Create Package
+  draft_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: "find env"
+        run: |
+          set | grep GITHUB_ | grep -v GITHUB_TOKEN
+          zip -r pkg.zip *.md
+          echo "$(openssl rand -hex 4)" > "random-name-$(openssl rand -hex 4).txt"
+          echo "$(openssl rand -hex 4)" > "random-name-$(openssl rand -hex 4).txt"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }} # This token is provided by Actions, you do not need to create your own token
         with:
-          path: ${{steps.build_deb_package.outputs.file_name}}
-
-      - name: Release the Package
-        uses: softprops/action-gh-release@v1
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }} (draft)
+          body: |
+            Test upload-to-github-release works with `actions/create-release`.
+          draft: true
+          prerelease: false
+      - uses: xresloader/upload-to-github-release@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          files: ${{steps.build_deb_package.outputs.file_name}}
+          file: "*.md;*.zip;random-name-*.txt"
+          delete_file: "random-name-*.txt;random-*.txt"
+          release_id: ${{ steps.create_release.outputs.id }}
+          update_release_body: ${{ github.ref }}
+          update_release_body_append: "true"
+          overwrite: true
+          verbose: true
