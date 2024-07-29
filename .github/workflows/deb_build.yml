@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          file: "/*.deb" # This is where you use the output from the build step
+          file: "./ssh+_0.5.0_amd64.deb" # This is where you use the output from the build step
           release_id: ${{ steps.create_release.outputs.id }}
           update_release_body: ${{ github.ref }}
           update_release_body_append: "true"
