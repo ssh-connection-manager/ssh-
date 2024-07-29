@@ -1,4 +1,4 @@
-name: deb-build
+name: DEB Build
 
 on:
   push:
@@ -11,29 +11,35 @@ env:
   DESC: 'ssh+ - cli app connect manager for ssh'
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
       - name: Build Go
         run: go build -v ./
-      - name: Create deb package
+
+      - name: Create DEB package
         run: |
           mkdir -p .debpkg/usr/bin
           cp -p ./${{ env.APP_NAME }} .debpkg/usr/bin/
-      - name: Build deb package
+
+      - name: Build DEB package
         uses: jiro4989/build-deb-action@v3
         id: build_deb_package
         with:
           package: ${{ env.APP_NAME }}
           package_root: .debpkg
           maintainer: ${{ env.MAINTAINER }}
-          version: ${{ github.ref }}
+          version: ${{ github.ref_name }}
           arch: 'amd64'
           depends: 'sshpass, ssh'
           desc: ${{ env.DESC }}
           homepage: 'https://github.com/ssh-connection-manager/ssh-'
-      - name: Upload build artifact
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           path: ${{steps.build_deb_package.outputs.file_name}}
@@ -42,22 +48,30 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: deb-package
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
           draft: false
           prerelease: false
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{steps.build_deb_package.outputs.file_name}}
-          asset_name: ${{ env.APP_NAME }}_${{ github.ref }}.deb
+          asset_path: ${{ env.APP_NAME }}_${{ github.ref_name }}.deb
+          asset_name: ${{ env.APP_NAME }}_${{ github.ref_name }}.deb
           asset_content_type: application/octet-stream
