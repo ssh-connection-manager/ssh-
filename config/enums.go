@@ -10,7 +10,7 @@ const (
 )
 
 const (
-	DirectionApp = Separator + Dot + Separator + NameApp + Separator
+	DirectionApp = Separator + Dot + NameApp + Separator
 )
 
 const (
