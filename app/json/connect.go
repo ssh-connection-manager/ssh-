@@ -2,8 +2,9 @@ package json
 
 import (
 	"errors"
-	"ssh+/app/file"
 	"ssh+/app/output"
+
+	"github.com/ssh-connection-manager/file"
 )
 
 type Connections struct {

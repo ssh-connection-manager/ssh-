@@ -1,16 +1,17 @@
 package json
 
 import (
-	"ssh+/app/file"
-
 	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/file"
 )
 
 func Generate() {
-	fileName := viper.GetString("NameFileConnects")
+	filePath := file.GetFullPath(
+		viper.GetString("FullPathConfig"),
+		viper.GetString("NameFileConnects"))
 
-	if !file.IsExistFile(fileName) {
-		file.GenerateFile(fileName)
+	if !file.IsExistFile(filePath) {
+		file.CreateFile(filePath)
 		CreateBaseJsonDataToFile()
 	}
 }

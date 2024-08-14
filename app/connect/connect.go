@@ -2,17 +2,20 @@ package connect
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
 	"os/exec"
 
-	"ssh+/app/file"
 	"ssh+/app/json"
 	"ssh+/app/output"
+
+	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/file"
 )
 
 func Ssh(c *json.Connections, alias string) {
-	filePath := file.GetFullPath(viper.GetString("NameFileConnects"))
+	filePath := file.GetFullPath(
+		viper.GetString("FullPathConfig"),
+		viper.GetString("NameFileConnects"))
 
 	data, err := file.ReadFile(filePath)
 	if err != nil {
