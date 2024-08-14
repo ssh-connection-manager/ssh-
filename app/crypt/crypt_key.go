@@ -2,14 +2,16 @@ package crypt
 
 import (
 	"crypto/rand"
-	"ssh+/app/file"
 	"ssh+/app/output"
 
 	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/file"
 )
 
 func getPathToKey() string {
-	filePath := file.GetFullPath(viper.GetString("NameFileCryptKey"))
+	filePath := file.GetFullPath(
+		viper.GetString("FullPathConfig"),
+		viper.GetString("NameFileCryptKey"))
 
 	return filePath
 }
@@ -24,10 +26,12 @@ func GetKey() []byte {
 }
 
 func GenerateKey() {
-	fileName := viper.GetString("NameFileCryptKey")
+	filePath := file.GetFullPath(
+		viper.GetString("FullPathConfig"),
+		viper.GetString("NameFileCryptKey"))
 
-	if !file.IsExistFile(fileName) {
-		file.GenerateFile(fileName)
+	if !file.IsExistFile(filePath) {
+		file.CreateFile(filePath)
 
 		if len(GetKey()) == 0 {
 			key := make([]byte, 32)
@@ -37,7 +41,10 @@ func GenerateKey() {
 				output.GetOutError("Key generation error")
 			}
 
-			file.WriteFile(getPathToKey(), key)
+			err = file.WriteFile(getPathToKey(), key)
+			if err != nil {
+				output.GetOutError("Error writing key")
+			}
 		}
 	}
 }
