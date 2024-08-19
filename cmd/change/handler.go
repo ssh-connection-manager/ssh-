@@ -3,7 +3,8 @@ package change
 import (
 	"ssh+/app/json"
 	"ssh+/app/output"
-	"ssh+/app/timeNow"
+
+	"github.com/ssh-connection-manager/time"
 )
 
 var connects json.Connections
@@ -13,14 +14,14 @@ func Connect(
 	alias, address, login, password string) {
 	var connections json.Connections
 
-	time := timeNow.GetTime()
+	timeNow := time.GetTime()
 
 	connect := json.Connect{
 		Alias:     alias,
 		Address:   address,
 		Login:     login,
 		Password:  password,
-		UpdatedAt: time,
+		UpdatedAt: timeNow,
 	}
 
 	connections.UpdateConnectJson(oldAlias, connect)
