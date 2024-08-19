@@ -2,6 +2,7 @@ package json
 
 import (
 	"errors"
+
 	"ssh+/app/output"
 
 	"github.com/ssh-connection-manager/file"
@@ -79,7 +80,7 @@ func (c *Connections) ExistConnectJsonByIndex(alias string) (int, error) {
 		}
 	}
 
-	return noFound, errors.New("Not found")
+	return noFound, errors.New("not found")
 }
 
 func (c *Connections) WriteConnectToJson(connect Connect) {
@@ -100,7 +101,10 @@ func (c *Connections) WriteConnectToJson(connect Connect) {
 	encodedConnect := SetCryptData(connect)
 	c.Connects = append(c.Connects, encodedConnect)
 
-	file.WriteFile(filePath, c.deserializationJson())
+	err = file.WriteFile(filePath, c.deserializationJson())
+	if err != nil {
+		output.GetOutError("File writing error")
+	}
 }
 
 func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
@@ -114,7 +118,7 @@ func (c *Connections) updateJsonDataByIndex(index int, connect Connect) error {
 		return nil
 	}
 
-	return errors.New("Connection update error")
+	return errors.New("connection update error")
 }
 
 func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
@@ -128,7 +132,10 @@ func (c *Connections) UpdateConnectJson(alias string, connect Connect) {
 		output.GetOutError("Connection update error")
 	}
 
-	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+	err = file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+	if err != nil {
+		output.GetOutError("Error updating connection")
+	}
 }
 
 func (c *Connections) deleteJsonDataByIndex(index int) {
@@ -146,5 +153,8 @@ func (c *Connections) DeleteConnectToJson(alias string) {
 
 	c.deleteJsonDataByIndex(index)
 
-	file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+	err = file.WriteFile(GetPathToConnectFile(), c.deserializationJson())
+	if err != nil {
+		output.GetOutError("Error deleting connection")
+	}
 }
