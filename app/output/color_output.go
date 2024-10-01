@@ -26,7 +26,7 @@ func getOut(color *color.Color, message string, isExitApp bool) {
 func GetOutSuccess(successName string) {
 	green := color.New(color.FgGreen)
 
-	getOut(green, successName, !ExitApp)
+	getOut(green, successName, DontExitApp)
 }
 
 func GetOutError(errName string) {

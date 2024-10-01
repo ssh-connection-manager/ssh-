@@ -1,5 +1,6 @@
 package output
 
 const (
-	ExitApp = true
+	ExitApp     = true
+	DontExitApp = false
 )
