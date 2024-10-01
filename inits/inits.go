@@ -1,9 +1,12 @@
 package inits
 
 import (
-	"ssh+/app/crypt"
+	"github.com/spf13/viper"
 	"ssh+/app/json"
+	"ssh+/app/output"
 	"ssh+/config"
+
+	"github.com/ssh-connection-manager/crypt"
 )
 
 func generateConfigFile() {
@@ -15,7 +18,13 @@ func createFileConnects() {
 }
 
 func generateCryptKey() {
-	crypt.GenerateKey()
+	pathConf := viper.GetString("FullPathConfig")
+	fileNameKey := viper.GetString("NameFileCryptKey")
+
+	err := crypt.GenerateKey(pathConf, fileNameKey)
+	if err != nil {
+		output.GetOutError("err generate key")
+	}
 }
 
 func SetDependencies() {
