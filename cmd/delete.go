@@ -1,13 +1,14 @@
 package cmd
 
 import (
-	"ssh+/app/json"
 	"ssh+/app/output"
 	"ssh+/view"
 
 	del "ssh+/cmd/delete"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/json"
 )
 
 var deleteCmd = &cobra.Command{
@@ -17,7 +18,13 @@ var deleteCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects json.Connections
 
-		aliases := connects.GetConnectionsAlias()
+		filePath := viper.GetString("FullPathConfig")
+		fileName := viper.GetString("NameFileConnects")
+
+		aliases, err := connects.GetConnectionsAlias(filePath, fileName)
+		if err != nil {
+			output.GetOutError(err.Error())
+		}
 
 		customChoice := view.Select{
 			FilterPlaceholder: del.FilterPlaceholder,

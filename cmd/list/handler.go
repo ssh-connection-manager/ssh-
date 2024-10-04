@@ -1,11 +1,21 @@
 package list
 
 import (
-	"ssh+/app/json"
+	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/json"
+	"ssh+/app/output"
 )
 
 func Show() [][]string {
 	var connections json.Connections
 
-	return connections.GetDataForListConnect()
+	filePath := viper.GetString("FullPathConfig")
+	fileName := viper.GetString("NameFileConnects")
+
+	connectionsData, err := connections.GetDataForListConnect(filePath, fileName)
+	if err != nil {
+		output.GetOutError(err.Error())
+	}
+
+	return connectionsData
 }
