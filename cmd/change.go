@@ -1,12 +1,13 @@
 package cmd
 
 import (
-	"ssh+/app/json"
+	"github.com/spf13/viper"
 	"ssh+/app/output"
 	"ssh+/cmd/change"
 	"ssh+/view"
 
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/json"
 )
 
 var changeCmd = &cobra.Command{
@@ -17,7 +18,13 @@ var changeCmd = &cobra.Command{
 		var alias, address, login, password string
 		var connects json.Connections
 
-		aliases := connects.GetConnectionsAlias()
+		filePath := viper.GetString("FullPathConfig")
+		fileName := viper.GetString("NameFileConnects")
+
+		aliases, err := connects.GetConnectionsAlias(filePath, fileName)
+		if err != nil {
+			output.GetOutError(err.Error())
+		}
 
 		customChoice := view.Select{
 			FilterPlaceholder: change.FilterPlaceholder,

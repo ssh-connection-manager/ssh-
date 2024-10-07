@@ -1,8 +1,10 @@
 package create
 
 import (
-	"ssh+/app/json"
+	"ssh+/app/output"
 
+	"github.com/spf13/viper"
+	"github.com/ssh-connection-manager/json"
 	"github.com/ssh-connection-manager/time"
 )
 
@@ -20,5 +22,11 @@ func Connect(alias, address, login, password string) {
 		UpdatedAt: timeNow,
 	}
 
-	connections.WriteConnectToJson(connect)
+	filePath := viper.GetString("FullPathConfig")
+	fileName := viper.GetString("NameFileConnects")
+
+	err := connections.WriteConnectToJson(connect, filePath, fileName)
+	if err != nil {
+		output.GetOutError(err.Error())
+	}
 }
