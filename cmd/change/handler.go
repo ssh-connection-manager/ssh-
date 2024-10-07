@@ -27,8 +27,9 @@ func Connect(
 
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
+	fileKey := viper.GetString("NameFileCryptKey")
 
-	err := connections.UpdateConnectJson(oldAlias, connect, filePath, fileName)
+	err := connections.UpdateConnectJson(oldAlias, connect, filePath, fileName, fileKey)
 	if err != nil {
 		output.GetOutError("err update")
 	}
@@ -37,8 +38,9 @@ func Connect(
 func ExistByIndex(alias string) {
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
+	fileKey := viper.GetString("NameFileCryptKey")
 
-	_, err := connects.ExistConnectJsonByIndex(alias, filePath, fileName)
+	_, err := connects.ExistConnectJsonByIndex(alias, filePath, fileName, fileKey)
 
 	if err != nil {
 		output.GetOutError("No connection found")

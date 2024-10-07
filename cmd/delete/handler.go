@@ -12,8 +12,9 @@ func Connect(alias string) {
 
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
+	fileKey := viper.GetString("NameFileCryptKey")
 
-	err := connects.DeleteConnectToJson(alias, filePath, fileName)
+	err := connects.DeleteConnectToJson(alias, filePath, fileName, fileKey)
 	if err != nil {
 		output.GetOutError(err.Error())
 	}

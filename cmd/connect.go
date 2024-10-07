@@ -19,8 +19,9 @@ var ConnectCmd = &cobra.Command{
 
 		filePath := viper.GetString("FullPathConfig")
 		fileName := viper.GetString("NameFileConnects")
+		fileKey := viper.GetString("NameFileCryptKey")
 
-		aliases, err := connects.GetConnectionsAlias(filePath, fileName)
+		aliases, err := connects.GetConnectionsAlias(filePath, fileName, fileKey)
 		if err != nil {
 			output.GetOutError(err.Error())
 		}

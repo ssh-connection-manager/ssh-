@@ -24,8 +24,9 @@ func Connect(alias, address, login, password string) {
 
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
+	fileKey := viper.GetString("NameFileCryptKey")
 
-	err := connections.WriteConnectToJson(connect, filePath, fileName)
+	err := connections.WriteConnectToJson(connect, filePath, fileName, fileKey)
 	if err != nil {
 		output.GetOutError(err.Error())
 	}

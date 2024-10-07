@@ -13,8 +13,9 @@ func Ssh(alias string) {
 
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
+	fileKey := viper.GetString("NameFileCryptKey")
 
-	err := connect.Ssh(&connections, alias, filePath, fileName)
+	err := connect.Ssh(&connections, alias, filePath, fileName, fileKey)
 	if err != nil {
 		output.GetOutError("err connect")
 	}
