@@ -4,39 +4,35 @@ import (
 	"ssh+/app/output"
 	"ssh+/view"
 
-	del "ssh+/cmd/delete"
+	delCmd "ssh+/cmd/delete"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"github.com/ssh-connection-manager/json"
 )
 
 var deleteCmd = &cobra.Command{
-	Use:   del.UseCommand,
-	Short: del.ShortDescription,
-	Long:  del.LongDescription,
+	Use:   delCmd.UseCommand,
+	Short: delCmd.ShortDescription,
+	Long:  delCmd.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects json.Connections
 
-		filePath := viper.GetString("FullPathConfig")
-		fileName := viper.GetString("NameFileConnects")
-
-		aliases, err := connects.GetConnectionsAlias(filePath, fileName)
+		aliases, err := connects.GetConnectionsAlias()
 		if err != nil {
 			output.GetOutError(err.Error())
 		}
 
 		customChoice := view.Select{
-			FilterPlaceholder: del.FilterPlaceholder,
-			SelectionPrompt:   del.SelectionPrompt,
-			FilterPrompt:      del.FilterPrompt,
-			Template:          del.Template,
-			PageSize:          del.PageSize,
+			FilterPlaceholder: delCmd.FilterPlaceholder,
+			SelectionPrompt:   delCmd.SelectionPrompt,
+			FilterPrompt:      delCmd.FilterPrompt,
+			Template:          delCmd.Template,
+			PageSize:          delCmd.PageSize,
 		}
 
 		choice := customChoice.SelectedValue(aliases)
 
-		del.Connect(choice)
+		delCmd.Connect(choice)
 
 		output.GetOutSuccess("Connection removed")
 	},

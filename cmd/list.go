@@ -3,19 +3,20 @@ package cmd
 import (
 	"fmt"
 
-	"ssh+/cmd/list"
 	"ssh+/view"
+
+	lsCmd "ssh+/cmd/list"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 )
 
 var listCmd = &cobra.Command{
-	Use:   list.UseCommand,
-	Short: list.ShortDescription,
-	Long:  list.LongDescription,
+	Use:   lsCmd.UseCommand,
+	Short: lsCmd.ShortDescription,
+	Long:  lsCmd.LongDescription,
 	Run: func(cmd *cobra.Command, args []string) {
-		list := list.Show()
+		list := lsCmd.Show()
 
 		fmt.Println("A list of your connections:")
 

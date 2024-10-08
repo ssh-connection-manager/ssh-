@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"github.com/spf13/viper"
 	"ssh+/app/output"
 	"ssh+/cmd/connect"
 	"ssh+/view"
@@ -17,10 +16,7 @@ var ConnectCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var connects json.Connections
 
-		filePath := viper.GetString("FullPathConfig")
-		fileName := viper.GetString("NameFileConnects")
-
-		aliases, err := connects.GetConnectionsAlias(filePath, fileName)
+		aliases, err := connects.GetConnectionsAlias()
 		if err != nil {
 			output.GetOutError(err.Error())
 		}

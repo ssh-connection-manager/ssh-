@@ -18,10 +18,13 @@ func getHomeDir() string {
 	return usr.HomeDir + DirectionApp
 }
 
-func existOrCreateConfig(configPath string) {
+func existOrCreateConfig(fl file.File) {
 	err := viper.ReadInConfig()
 	if err != nil {
-		file.CreateFile(configPath)
+		err := fl.CreateFile()
+		if err != nil {
+			output.GetOutError("File creation error down")
+		}
 
 		err = viper.ReadInConfig()
 		if err != nil {
@@ -52,8 +55,12 @@ func Generate() {
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		configPath := getHomeDir() + FullNameFileConfig
-		existOrCreateConfig(configPath)
+		confPath := getHomeDir()
+		confName := FullNameFileConfig
+
+		fileConf := file.File{Path: confPath, Name: confName}
+
+		existOrCreateConfig(fileConf)
 		setConfigVariable()
 	}
 }
