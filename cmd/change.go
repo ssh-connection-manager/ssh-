@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"github.com/spf13/viper"
 	"ssh+/app/output"
 	"ssh+/cmd/change"
 	"ssh+/view"
@@ -18,11 +17,7 @@ var changeCmd = &cobra.Command{
 		var alias, address, login, password string
 		var connects json.Connections
 
-		filePath := viper.GetString("FullPathConfig")
-		fileName := viper.GetString("NameFileConnects")
-		fileKey := viper.GetString("NameFileCryptKey")
-
-		aliases, err := connects.GetConnectionsAlias(filePath, fileName, fileKey)
+		aliases, err := connects.GetConnectionsAlias()
 		if err != nil {
 			output.GetOutError(err.Error())
 		}

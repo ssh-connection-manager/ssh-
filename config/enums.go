@@ -1,20 +1,20 @@
 package config
 
 const (
-	NameFileConfig = "config"
-	TypeFileConfig = "yml"
-	Separator      = "/"
-	NameApp        = "ssh+"
-	Space          = " "
-	Dot            = "."
+	NameFileConfig string = "config"
+	TypeFileConfig string = "yml"
+	Separator      string = "/"
+	NameApp        string = "ssh+"
+	Space          string = " "
+	Dot            string = "."
 )
 
 const (
-	DirectionApp = Separator + Dot + NameApp + Separator
+	NameFileConnects string = "connect-ssh.json"
+	NameFileCryptKey string = "key.txt"
 )
 
 const (
+	DirectionApp       = Separator + Dot + NameApp + Separator
 	FullNameFileConfig = NameFileConfig + Dot + TypeFileConfig
-	NameFileConnects   = "connect-ssh.json"
-	NameFileCryptKey   = "key.txt"
 )
