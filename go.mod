@@ -11,10 +11,10 @@ require (
 	github.com/muesli/termenv v0.15.2
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
-	github.com/ssh-connection-manager/connect v1.0.2
-	github.com/ssh-connection-manager/crypt v1.0.2
-	github.com/ssh-connection-manager/file v1.0.1
-	github.com/ssh-connection-manager/json v1.0.2
+	github.com/ssh-connection-manager/connect v1.1.0
+	github.com/ssh-connection-manager/crypt v1.1.0
+	github.com/ssh-connection-manager/file v1.2.0
+	github.com/ssh-connection-manager/json v1.1.0
 	github.com/ssh-connection-manager/time v1.0.0
 )
 
