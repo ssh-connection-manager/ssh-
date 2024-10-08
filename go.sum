@@ -135,6 +135,10 @@ github.com/ssh-connection-manager/json v1.0.2 h1:fKnkwElHz5fECV1UsXLuOpbXZqPm3w0
 github.com/ssh-connection-manager/json v1.0.2/go.mod h1:tcxfTH7raNhyKDy5NqlHxkv2JOl2PfQrm0iCYvdsZZ8=
 github.com/ssh-connection-manager/json v1.1.0 h1:n3DCR7Fn6uSBYamdS4JocIQx3gJCgIMF2EdP/pb9ovY=
 github.com/ssh-connection-manager/json v1.1.0/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
+github.com/ssh-connection-manager/json v1.1.1 h1:p0GkqrpvLm+1ywk6LMnjTQSV5Xu+uAtlJ+jYAa9+ZIw=
+github.com/ssh-connection-manager/json v1.1.1/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
+github.com/ssh-connection-manager/json v1.1.2 h1:EegLXOFtm1WEd+4wR9bx/LfjtVXu+TOn9bnDTOP8zeQ=
+github.com/ssh-connection-manager/json v1.1.2/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
 github.com/ssh-connection-manager/time v1.0.0 h1:pGTqenPyDymD489mNcsUbICSBihZpl7yWEnNIICZLfA=
 github.com/ssh-connection-manager/time v1.0.0/go.mod h1:CXJOg0LIHaATADNwv+eFg8JnH5md1GoRa/ZYbSuPDXs=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

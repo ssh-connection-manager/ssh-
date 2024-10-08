@@ -14,7 +14,7 @@ require (
 	github.com/ssh-connection-manager/connect v1.1.0
 	github.com/ssh-connection-manager/crypt v1.1.0
 	github.com/ssh-connection-manager/file v1.2.0
-	github.com/ssh-connection-manager/json v1.1.0
+	github.com/ssh-connection-manager/json v1.1.2
 	github.com/ssh-connection-manager/time v1.0.0
 )
 
