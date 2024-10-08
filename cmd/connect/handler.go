@@ -1,6 +1,7 @@
 package connect
 
 import (
+	"github.com/ssh-connection-manager/file"
 	"ssh+/app/output"
 
 	"github.com/spf13/viper"
@@ -13,9 +14,10 @@ func Ssh(alias string) {
 
 	filePath := viper.GetString("FullPathConfig")
 	fileName := viper.GetString("NameFileConnects")
-	fileKey := viper.GetString("NameFileCryptKey")
 
-	err := connect.Ssh(&connections, alias, filePath, fileName, fileKey)
+	fileConnect := file.File{Path: filePath, Name: fileName}
+
+	err := connect.Ssh(&connections, alias, fileConnect)
 	if err != nil {
 		output.GetOutError("err connect")
 	}

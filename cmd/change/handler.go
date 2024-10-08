@@ -1,7 +1,6 @@
 package change
 
 import (
-	"github.com/spf13/viper"
 	"ssh+/app/output"
 
 	"github.com/ssh-connection-manager/json"
@@ -25,22 +24,14 @@ func Connect(
 		UpdatedAt: timeNow,
 	}
 
-	filePath := viper.GetString("FullPathConfig")
-	fileName := viper.GetString("NameFileConnects")
-	fileKey := viper.GetString("NameFileCryptKey")
-
-	err := connections.UpdateConnectJson(oldAlias, connect, filePath, fileName, fileKey)
+	err := connections.UpdateConnectJson(oldAlias, connect)
 	if err != nil {
 		output.GetOutError("err update")
 	}
 }
 
 func ExistByIndex(alias string) {
-	filePath := viper.GetString("FullPathConfig")
-	fileName := viper.GetString("NameFileConnects")
-	fileKey := viper.GetString("NameFileCryptKey")
-
-	_, err := connects.ExistConnectJsonByIndex(alias, filePath, fileName, fileKey)
+	_, err := connects.ExistConnectJsonByIndex(alias)
 
 	if err != nil {
 		output.GetOutError("No connection found")
