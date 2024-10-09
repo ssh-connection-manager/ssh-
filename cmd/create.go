@@ -1,11 +1,10 @@
 package cmd
 
 import (
-	"ssh+/app/output"
-
 	crCmd "ssh+/cmd/create"
 
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
 

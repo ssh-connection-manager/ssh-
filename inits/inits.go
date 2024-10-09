@@ -1,14 +1,13 @@
 package inits
 
 import (
-	"ssh+/app/output"
-
 	conf "ssh+/config"
 
 	"github.com/spf13/viper"
 	"github.com/ssh-connection-manager/crypt"
 	"github.com/ssh-connection-manager/file"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 )
 
 func generateConfigFile() {

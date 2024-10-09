@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"ssh+/app/output"
 	"ssh+/cmd/root"
 
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/output"
 )
 
 var rootCmd = &cobra.Command{
@@ -17,6 +17,6 @@ func Execute() {
 
 	err := rootCmd.Execute()
 	if err != nil {
-		output.GetOutError("ssh+ is die")
+		output.GetOutError("ssh+ error")
 	}
 }

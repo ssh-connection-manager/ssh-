@@ -1,9 +1,8 @@
 package change
 
 import (
-	"ssh+/app/output"
-
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/time"
 )
 

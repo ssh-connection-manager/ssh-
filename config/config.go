@@ -3,10 +3,9 @@ package config
 import (
 	"os/user"
 
-	"ssh+/app/output"
-
 	"github.com/spf13/viper"
 	"github.com/ssh-connection-manager/file"
+	"github.com/ssh-connection-manager/output"
 )
 
 func getHomeDir() string {
