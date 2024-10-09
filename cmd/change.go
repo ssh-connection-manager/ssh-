@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"ssh+/app/output"
 	"ssh+/cmd/change"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
 

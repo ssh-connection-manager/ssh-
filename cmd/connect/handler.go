@@ -1,12 +1,11 @@
 package connect
 
 import (
-	"github.com/ssh-connection-manager/file"
-	"ssh+/app/output"
-
 	"github.com/spf13/viper"
 	"github.com/ssh-connection-manager/connect"
+	"github.com/ssh-connection-manager/file"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 )
 
 func Ssh(alias string) {

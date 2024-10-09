@@ -1,12 +1,11 @@
 package cmd
 
 import (
-	"ssh+/app/output"
-
 	delCmd "ssh+/cmd/delete"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
 

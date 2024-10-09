@@ -139,6 +139,8 @@ github.com/ssh-connection-manager/json v1.1.1 h1:p0GkqrpvLm+1ywk6LMnjTQSV5Xu+uAt
 github.com/ssh-connection-manager/json v1.1.1/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
 github.com/ssh-connection-manager/json v1.1.2 h1:EegLXOFtm1WEd+4wR9bx/LfjtVXu+TOn9bnDTOP8zeQ=
 github.com/ssh-connection-manager/json v1.1.2/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
+github.com/ssh-connection-manager/output v1.0.0 h1:lNeAna3VfGbQWRT4gLHOBTI2kiPYGH97IZMlPSEW1oU=
+github.com/ssh-connection-manager/output v1.0.0/go.mod h1:on5ek6zp5b6YvyZrmaTUciDQp5BqpPOeaXemJpMJxAI=
 github.com/ssh-connection-manager/time v1.0.0 h1:pGTqenPyDymD489mNcsUbICSBihZpl7yWEnNIICZLfA=
 github.com/ssh-connection-manager/time v1.0.0/go.mod h1:CXJOg0LIHaATADNwv+eFg8JnH5md1GoRa/ZYbSuPDXs=
 github.com/ssh-connection-manager/view v1.0.0 h1:tLQ++jTRsK+jXtLh/lmUTUBiCQFWo5SN/eMq+EBD7hw=

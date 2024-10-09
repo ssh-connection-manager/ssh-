@@ -1,9 +1,8 @@
 package delete
 
 import (
-	"ssh+/app/output"
-
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/output"
 )
 
 func Connect(alias string) {
