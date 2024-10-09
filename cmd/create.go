@@ -2,11 +2,11 @@ package cmd
 
 import (
 	"ssh+/app/output"
-	"ssh+/view"
 
 	crCmd "ssh+/cmd/create"
 
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/view"
 )
 
 var createCmd = &cobra.Command{
@@ -31,7 +31,10 @@ var createCmd = &cobra.Command{
 			Arguments:   arguments,
 		}
 
-		customTextInput.DrawInput()
+		err := customTextInput.DrawInput()
+		if err != nil {
+			output.GetOutError("Error drawing input at create: " + err.Error())
+		}
 
 		crCmd.Connect(alias, address, login, password)
 

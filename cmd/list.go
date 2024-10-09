@@ -3,12 +3,11 @@ package cmd
 import (
 	"fmt"
 
-	"ssh+/view"
-
 	lsCmd "ssh+/cmd/list"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/view"
 )
 
 var listCmd = &cobra.Command{

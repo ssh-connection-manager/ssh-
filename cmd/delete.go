@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"ssh+/app/output"
-	"ssh+/view"
 
 	delCmd "ssh+/cmd/delete"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/view"
 )
 
 var deleteCmd = &cobra.Command{
@@ -30,7 +30,10 @@ var deleteCmd = &cobra.Command{
 			PageSize:          delCmd.PageSize,
 		}
 
-		choice := customChoice.SelectedValue(aliases)
+		choice, err := customChoice.SelectedValue(aliases)
+		if err != nil {
+			output.GetOutError("Error selecting connection at delete: " + err.Error())
+		}
 
 		delCmd.Connect(choice)
 

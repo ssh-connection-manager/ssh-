@@ -3,10 +3,10 @@ package cmd
 import (
 	"ssh+/app/output"
 	"ssh+/cmd/connect"
-	"ssh+/view"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/view"
 )
 
 var ConnectCmd = &cobra.Command{
@@ -29,7 +29,10 @@ var ConnectCmd = &cobra.Command{
 			PageSize:          connect.PageSize,
 		}
 
-		choice := customChoice.SelectedValue(aliases)
+		choice, err := customChoice.SelectedValue(aliases)
+		if err != nil {
+			output.GetOutError("Error selecting connection at connect: " + err.Error())
+		}
 
 		connect.Ssh(choice)
 	},
