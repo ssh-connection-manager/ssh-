@@ -3,10 +3,10 @@ package cmd
 import (
 	"ssh+/app/output"
 	"ssh+/cmd/change"
-	"ssh+/view"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/view"
 )
 
 var changeCmd = &cobra.Command{
@@ -30,7 +30,10 @@ var changeCmd = &cobra.Command{
 			PageSize:          change.PageSize,
 		}
 
-		choice := customChoice.SelectedValue(aliases)
+		choice, err := customChoice.SelectedValue(aliases)
+		if err != nil {
+			output.GetOutError("Error selecting alias: " + err.Error())
+		}
 
 		change.ExistByIndex(choice)
 
@@ -49,7 +52,10 @@ var changeCmd = &cobra.Command{
 			Arguments:   arguments,
 		}
 
-		customTextInput.DrawInput()
+		err = customTextInput.DrawInput()
+		if err != nil {
+			output.GetOutError("Error drawing input at change: " + err.Error())
+		}
 
 		change.Connect(choice, alias, address, login, password)
 
