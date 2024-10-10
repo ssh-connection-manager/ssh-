@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/kernel/app"
 	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
@@ -34,7 +35,7 @@ var ConnectCmd = &cobra.Command{
 			output.GetOutError("Error selecting connection at connect: " + err.Error())
 		}
 
-		connect.Ssh(choice)
+		app.Connect(choice)
 	},
 }
 

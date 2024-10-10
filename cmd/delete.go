@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/kernel/app"
 	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
@@ -34,7 +35,7 @@ var deleteCmd = &cobra.Command{
 			output.GetOutError("Error selecting connection at delete: " + err.Error())
 		}
 
-		delCmd.Connect(choice)
+		app.Delete(choice)
 
 		output.GetOutSuccess("Connection removed")
 	},
