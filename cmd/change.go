@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/json"
+	"github.com/ssh-connection-manager/kernel/app"
 	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
@@ -35,7 +36,10 @@ var changeCmd = &cobra.Command{
 			output.GetOutError("Error selecting alias: " + err.Error())
 		}
 
-		change.ExistByIndex(choice)
+		_, err = connects.ExistConnectJsonByIndex(alias)
+		if err != nil {
+			output.GetOutError("No connection found")
+		}
 
 		arguments := [][]*string{
 			{&change.NameAlias, &alias},
@@ -57,7 +61,7 @@ var changeCmd = &cobra.Command{
 			output.GetOutError("Error drawing input at change: " + err.Error())
 		}
 
-		change.Connect(choice, alias, address, login, password)
+		app.Change(choice, alias, address, login, password)
 
 		output.GetOutSuccess("Update called")
 	},

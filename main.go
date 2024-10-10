@@ -2,7 +2,8 @@ package main
 
 import (
 	"ssh+/cmd"
-	"ssh+/inits"
+
+	"github.com/ssh-connection-manager/kernel/inits"
 )
 
 func init() {

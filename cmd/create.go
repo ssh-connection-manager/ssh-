@@ -4,6 +4,7 @@ import (
 	crCmd "ssh+/cmd/create"
 
 	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/kernel/app"
 	"github.com/ssh-connection-manager/output"
 	"github.com/ssh-connection-manager/view"
 )
@@ -35,7 +36,7 @@ var createCmd = &cobra.Command{
 			output.GetOutError("Error drawing input at create: " + err.Error())
 		}
 
-		crCmd.Connect(alias, address, login, password)
+		app.Create(alias, address, login, password)
 
 		output.GetOutSuccess("Create called")
 	},

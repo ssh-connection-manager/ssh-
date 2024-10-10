@@ -41,7 +41,7 @@ const (
 )
 
 const (
-	Placeholder = " не должен быть пустым"
+	Placeholder = " must not be empty"
 )
 
 var (
