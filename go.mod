@@ -3,7 +3,7 @@ module ssh+
 go 1.22.10
 
 require (
-	github.com/charmbracelet/lipgloss v0.13.0
+	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/cobra v1.8.1
 	github.com/ssh-connection-manager/json v1.1.4
 	github.com/ssh-connection-manager/kernel v1.0.2
@@ -16,7 +16,7 @@ require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/bubbles v0.16.1 // indirect
 	github.com/charmbracelet/bubbletea v0.24.2 // indirect
-	github.com/charmbracelet/x/ansi v0.1.4 // indirect
+	github.com/charmbracelet/x/ansi v0.4.2 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
 	github.com/erikgeiser/promptkit v0.9.0 // indirect
 	github.com/fatih/color v1.17.0 // indirect
