@@ -101,6 +101,8 @@ github.com/ssh-connection-manager/file v1.2.1 h1:vVTZWdKUnNf/TVRtflRed4oTYMBcV/N
 github.com/ssh-connection-manager/file v1.2.1/go.mod h1:v6ohozxsgX7s4ze2Vy4sesNBaJ9pcJG0aOmqgffJenA=
 github.com/ssh-connection-manager/file v1.3.0 h1:69qHcCcRiE6sC8G3LGyOCWPZ1wsGTYnIhEvrmf5FwOc=
 github.com/ssh-connection-manager/file v1.3.0/go.mod h1:v6ohozxsgX7s4ze2Vy4sesNBaJ9pcJG0aOmqgffJenA=
+github.com/ssh-connection-manager/file v1.3.1 h1:lKNR5HkDxoaLsqRh1oauc3fQQ3urvVCRt+lXyvvbdGU=
+github.com/ssh-connection-manager/file v1.3.1/go.mod h1:QPlIBUC+qRJ+CPJeUBpaADeHkpLhLwXml8UY5BgTxFA=
 github.com/ssh-connection-manager/json v1.1.2 h1:EegLXOFtm1WEd+4wR9bx/LfjtVXu+TOn9bnDTOP8zeQ=
 github.com/ssh-connection-manager/json v1.1.2/go.mod h1:EuNDd8ZBb6UNMxD3DBN8x7qTEF0HUn3nGCxeYGTUIMo=
 github.com/ssh-connection-manager/json v1.1.3 h1:894fXwfA5WGudtol+2iW3yyTblS+5kc0kx4JYqi1Pic=
