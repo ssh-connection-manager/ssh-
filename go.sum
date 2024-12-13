@@ -97,8 +97,8 @@ github.com/ssh-connection-manager/crypt v1.1.2 h1:UwWeWuupBTq5xIBsezfvtwlHY9hfLv
 github.com/ssh-connection-manager/crypt v1.1.2/go.mod h1:/w4Af2w3XcATcD84jAis/fQuLSUUt+ybqxDEQABbOo8=
 github.com/ssh-connection-manager/file v1.3.1 h1:lKNR5HkDxoaLsqRh1oauc3fQQ3urvVCRt+lXyvvbdGU=
 github.com/ssh-connection-manager/file v1.3.1/go.mod h1:QPlIBUC+qRJ+CPJeUBpaADeHkpLhLwXml8UY5BgTxFA=
-github.com/ssh-connection-manager/json v1.1.4 h1:UJHYnm8SnKYfW4VshzLpYcocknEJnjkx5MF1JbgL7ug=
-github.com/ssh-connection-manager/json v1.1.4/go.mod h1:qQLeS97oLTEJ5mis3wygPH1VdbAyUdjLHNLZTLofQs4=
+github.com/ssh-connection-manager/json v1.1.5 h1:qIx+PHPH9RoNprcIIill5AxH2fqbWgvFZ1gGrHaS/m8=
+github.com/ssh-connection-manager/json v1.1.5/go.mod h1:nLMWSGCWrT8GMllSdHg9K5K0yG53mrrDx+iD2FA21IA=
 github.com/ssh-connection-manager/kernel v1.0.2 h1:CR73sAjszdy6e+ao6YxpQJRZK9gqdE6CdQTPJlG1NJA=
 github.com/ssh-connection-manager/kernel v1.0.2/go.mod h1:RGPBZgz0h7rbUXICdiZsKd2m2aKead9bD6mEYFIpoFU=
 github.com/ssh-connection-manager/output v1.0.0 h1:lNeAna3VfGbQWRT4gLHOBTI2kiPYGH97IZMlPSEW1oU=
