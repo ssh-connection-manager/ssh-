@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/cobra v1.8.1
 	github.com/ssh-connection-manager/json v1.1.5
-	github.com/ssh-connection-manager/kernel v1.0.2
+	github.com/ssh-connection-manager/kernel v1.0.3
 	github.com/ssh-connection-manager/output v1.0.0
 	github.com/ssh-connection-manager/view v1.0.0
 )
