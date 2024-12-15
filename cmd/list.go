@@ -7,8 +7,8 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/kernel/app"
-	"github.com/ssh-connection-manager/view"
+	"github.com/ssh-connection-manager/kernel/v2/app"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/view"
 )
 
 var listCmd = &cobra.Command{

@@ -4,9 +4,9 @@ import (
 	crCmd "ssh+/cmd/create"
 
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/kernel/app"
-	"github.com/ssh-connection-manager/output"
-	"github.com/ssh-connection-manager/view"
+	"github.com/ssh-connection-manager/kernel/v2/app"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/view"
 )
 
 var createCmd = &cobra.Command{

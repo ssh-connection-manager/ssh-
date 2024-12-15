@@ -4,7 +4,7 @@ import (
 	"ssh+/cmd/root"
 
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/output"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
 )
 
 var rootCmd = &cobra.Command{
