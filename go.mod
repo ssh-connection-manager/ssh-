@@ -5,10 +5,7 @@ go 1.22.10
 require (
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/cobra v1.8.1
-	github.com/ssh-connection-manager/json v1.1.5
-	github.com/ssh-connection-manager/kernel v1.0.3
-	github.com/ssh-connection-manager/output v1.0.0
-	github.com/ssh-connection-manager/view v1.0.0
+	github.com/ssh-connection-manager/kernel/v2 v2.0.0
 )
 
 require (
@@ -43,10 +40,6 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
-	github.com/ssh-connection-manager/connect v1.1.0 // indirect
-	github.com/ssh-connection-manager/crypt v1.1.2 // indirect
-	github.com/ssh-connection-manager/file v1.3.1 // indirect
-	github.com/ssh-connection-manager/time v1.0.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
