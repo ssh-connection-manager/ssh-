@@ -127,6 +127,8 @@ github.com/ssh-connection-manager/kernel/v2 v2.1.0 h1:MMftGTG6p2kKKWzci7BxjbXWVB
 github.com/ssh-connection-manager/kernel/v2 v2.1.0/go.mod h1:cvIWuPWeN9TUC9R2VGo1CY/qFnuCdn3jBE5E6LWaac0=
 github.com/ssh-connection-manager/kernel/v2 v2.1.1 h1:3iJqTn+thGvdKh+/p6mhd+XewausiDgiuP5Wa/4eGfA=
 github.com/ssh-connection-manager/kernel/v2 v2.1.1/go.mod h1:cvIWuPWeN9TUC9R2VGo1CY/qFnuCdn3jBE5E6LWaac0=
+github.com/ssh-connection-manager/kernel/v2 v2.1.2 h1:yWGybD1Ebld28hsVudxqM5mlOIhL6tvwvJ9kg/j7SJY=
+github.com/ssh-connection-manager/kernel/v2 v2.1.2/go.mod h1:cvIWuPWeN9TUC9R2VGo1CY/qFnuCdn3jBE5E6LWaac0=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=
