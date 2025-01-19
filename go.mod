@@ -5,7 +5,7 @@ go 1.22.10
 require (
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/cobra v1.8.1
-	github.com/ssh-connection-manager/kernel/v2 v2.1.2
+	github.com/ssh-connection-manager/kernel/v2 v2.1.3
 )
 
 require (
