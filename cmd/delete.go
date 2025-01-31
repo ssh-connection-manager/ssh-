@@ -1,13 +1,14 @@
 package cmd
 
 import (
+	"ssh+/app/view"
+
 	delCmd "ssh+/cmd/delete"
 
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/kernel/v2/app"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/app"
 	"github.com/ssh-connection-manager/kernel/v2/pkg/json"
 	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
-	"github.com/ssh-connection-manager/kernel/v2/pkg/view"
 )
 
 var deleteCmd = &cobra.Command{
