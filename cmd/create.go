@@ -1,12 +1,13 @@
 package cmd
 
 import (
+	"ssh+/app/view"
+
 	crCmd "ssh+/cmd/create"
 
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/kernel/v2/app"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/app"
 	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
-	"github.com/ssh-connection-manager/kernel/v2/pkg/view"
 )
 
 var createCmd = &cobra.Command{
